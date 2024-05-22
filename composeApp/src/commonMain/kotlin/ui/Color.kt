@@ -17,3 +17,4 @@ val ColorOrangeLight = Color(0xFFFFA79B)
 
 val ColorPurple = Color(0xFF7D5DB0)
 val ColorYellow = Color(0xFFFDE400)
+val ColorPurple75 = Color(0xBF7D5DB0)

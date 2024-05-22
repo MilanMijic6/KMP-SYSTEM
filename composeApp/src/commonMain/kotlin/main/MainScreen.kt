@@ -21,12 +21,12 @@ import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.profile
 import eventhubapplication.composeapp.generated.resources.tab_home
 import eventhubapplication.composeapp.generated.resources.tab_my_events
-import eventhubapplication.composeapp.generated.resources.tab_profile
 import main.tabs.HomeTab
 import main.tabs.MyEventsTab
 import main.tabs.ProfileTab
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import ui.ColorPurple75
 import util.TabNavigationItem
 import util.TopBarHeader
 
@@ -62,7 +62,8 @@ class MainScreen(
                                     topStart = 30.dp,
                                     topEnd = 30.dp
                                 )
-                            )
+                            ),
+                        backgroundColor = ColorPurple75
                     ) {
                         TabNavigationItem(HomeTab(navigator))
                         TabNavigationItem(MyEventsTab(navigator))
@@ -73,7 +74,9 @@ class MainScreen(
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(it)
+                        .padding(
+                            top = it.calculateTopPadding()
+                        )
                 ) {
                     CurrentTab()
                 }

@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
-import ui.ColorPurple
 import ui.ColorYellow
 import ui.FontRegular
 import ui.TextGray
@@ -55,7 +54,7 @@ fun RowScope.TabNavigationItem(
         selectedContentColor = ColorYellow,
         unselectedContentColor = Color.White,
         modifier = Modifier
-            .background(ColorPurple)
+            .background(Color.Transparent)
             .padding(
                 top = 20.dp,
                 bottom = 10.dp

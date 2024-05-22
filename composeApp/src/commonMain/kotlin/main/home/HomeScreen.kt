@@ -25,10 +25,12 @@ class HomeScreen() : Screen {
             color = MaterialTheme.colorScheme.background
         ) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text(text = "Home Screen")
+                Text(
+                    text = "Home Screen",
+                    modifier = Modifier.align(Alignment.BottomCenter)
+                )
             }
         }
     }
