@@ -21,7 +21,7 @@ import ui.FontBold
 fun PurpleButton(
     text: String,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = { },
+    onClick: () -> Unit = { }
 ) {
     Button(
         modifier = modifier,

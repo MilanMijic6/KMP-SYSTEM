@@ -13,8 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import auth.login.LoginScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
+import eventhubapplication.composeapp.generated.resources.Res
+import eventhubapplication.composeapp.generated.resources.anonymous_sign
+import eventhubapplication.composeapp.generated.resources.email
+import eventhubapplication.composeapp.generated.resources.login
+import eventhubapplication.composeapp.generated.resources.name
+import eventhubapplication.composeapp.generated.resources.password
+import eventhubapplication.composeapp.generated.resources.sign_up
+import main.MainScreen
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.ColorPurple
 import util.ClickableText
 import util.DropdownMenu
@@ -32,6 +43,7 @@ class RegisterScreen(
         ShowMainContent(navigator = navigator)
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     private fun ShowMainContent(
         navigator: Navigator
@@ -48,7 +60,7 @@ class RegisterScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 HeaderText(
-                    text = "Sign Up",
+                    text = stringResource(Res.string.sign_up),
                     color = Color.Black,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
@@ -69,7 +81,7 @@ class RegisterScreen(
                         .padding(
                             top = 4.dp
                         ),
-                    text = "Name"
+                    text = stringResource(Res.string.name)
                 ) {
 
                 }
@@ -78,7 +90,7 @@ class RegisterScreen(
                         .padding(
                             top = 4.dp
                         ),
-                    text = "Email"
+                    text = stringResource(Res.string.email)
                 ) {
 
                 }
@@ -87,12 +99,12 @@ class RegisterScreen(
                         .padding(
                             top = 4.dp
                         ),
-                    text = "Password"
+                    text = stringResource(Res.string.password)
                 ) {
 
                 }
                 ClickableText(
-                    text = "Anonymous sign?",
+                    text = stringResource(Res.string.anonymous_sign),
                     textAlign = TextAlign.Center,
                     color = ColorPurple,
                     modifier = Modifier
@@ -100,22 +112,31 @@ class RegisterScreen(
                             top = 20.dp,
                             bottom = 40.dp
                         )
-                )
+                ) {
+                    //todo add real logic
+                    navigator.push(MainScreen(navigator))
+                }
                 PurpleButton(
-                    text = "Sign Up",
+                    text = stringResource(Res.string.sign_up),
                     modifier = Modifier
                         .padding(
                             16.dp
                         )
-                )
+                ) {
+                    //todo add real logic
+                    navigator.push(MainScreen(navigator))
+                }
                 ClickableText(
-                    text = "Login",
+                    text = stringResource(Res.string.login),
                     textAlign = TextAlign.Center,
                     color = ColorPurple,
                     modifier = Modifier.padding(
                         bottom = 20.dp
                     )
-                )
+                ) {
+                    //todo add real logic
+                    navigator.push(LoginScreen(navigator))
+                }
             }
         }
     }

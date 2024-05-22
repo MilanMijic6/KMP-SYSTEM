@@ -16,6 +16,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
+import eventhubapplication.composeapp.generated.resources.Res
+import eventhubapplication.composeapp.generated.resources.email
+import eventhubapplication.composeapp.generated.resources.log_in
+import eventhubapplication.composeapp.generated.resources.password
+import eventhubapplication.composeapp.generated.resources.sign_in_anonymous
+import eventhubapplication.composeapp.generated.resources.sign_up
+import main.MainScreen
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 import ui.ColorPurple
 import util.ClickableText
 import util.HeaderText
@@ -34,6 +43,7 @@ class LoginScreen(
         )
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     private fun ShowMainContent(
         navigator: Navigator
@@ -50,7 +60,7 @@ class LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 HeaderText(
-                    text = "Log In",
+                    text = stringResource(Res.string.log_in),
                     color = Color.Black,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
@@ -64,7 +74,7 @@ class LoginScreen(
                         .padding(
                             top = 10.dp
                         ),
-                    text = "Email"
+                    text = stringResource(Res.string.email)
                 ) {
 
                 }
@@ -73,7 +83,7 @@ class LoginScreen(
                         .padding(
                             top = 4.dp
                         ),
-                    text = "Password"
+                    text = stringResource(Res.string.password)
                 ) {
 
                 }
@@ -82,21 +92,27 @@ class LoginScreen(
                         .height(80.dp)
                 )
                 PurpleButton(
-                    text = "Log In",
+                    text = stringResource(Res.string.sign_up),
                     modifier = Modifier
                         .padding(
                             16.dp
                         )
-                )
+                ) {
+                    //todo add real logic
+                    navigator.push(MainScreen(navigator))
+                }
                 ClickableText(
-                    text = "Sign in anonymously?",
+                    text = stringResource(Res.string.sign_in_anonymous),
                     textAlign = TextAlign.Center,
                     color = ColorPurple,
                     modifier = Modifier
                         .padding(
                             bottom = 20.dp
                         )
-                )
+                ) {
+                    //todo add real logic
+                    navigator.push(MainScreen(navigator))
+                }
             }
         }
     }

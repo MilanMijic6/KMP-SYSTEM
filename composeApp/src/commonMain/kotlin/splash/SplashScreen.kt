@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import auth.login.LoginScreen
+import auth.register.RegisterScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -33,7 +34,7 @@ class SplashScreen : Screen {
         LaunchedEffect(Unit) {
             splashScreenViewModel.effect.collect {
                 when (it) {
-                    SplashContract.Effect.NavigateToRegisterScreen -> navigator.push(LoginScreen(navigator))
+                    SplashContract.Effect.NavigateToRegisterScreen -> navigator.push(RegisterScreen(navigator))
                     SplashContract.Effect.NavigateToMainScreen -> navigator.push(MainScreen(navigator))
                 }
             }

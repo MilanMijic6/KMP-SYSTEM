@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_home">Home</string>
+    <string name="tab_my_events">My events</string>
+    <string name="tab_profile">Account</string>
+    <string name="events">Events</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="show">Show</string>
+    <string name="hide">Hide</string>
+    <string name="anonymous_sign">Anonymous sign?</string>
+    <string name="sign_in_anonymous">Sign in anonymously?</string>
+
+</resources>
