@@ -28,6 +28,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import ui.ColorPurple75
 import util.TabNavigationItem
+import util.TopBarActionType
 import util.TopBarHeader
 
 class MainScreen(
@@ -48,7 +49,14 @@ class MainScreen(
             Scaffold(
                 topBar = {
                     TopBarHeader(
+                        modifier = Modifier
+                            .padding(
+                                end = 16.dp
+                            ),
                         title = getToolbarTitle(it.current),
+                        navigationActionType = getToolbarActionIcon(it.current),
+                        //todo use real logic later
+                        isLoggedIn = true,
                         onIconClick = {}
                     )
                 },
@@ -93,5 +101,15 @@ private fun getToolbarTitle(tabName: Tab): String {
         "My events" -> stringResource(Res.string.tab_my_events)
         "Account" -> stringResource(Res.string.profile)
         else -> ""
+    }
+}
+
+@Composable
+private fun getToolbarActionIcon(tabName: Tab): TopBarActionType     {
+    return when (tabName.options.title) {
+        "Home" -> TopBarActionType.EVENTS
+        "My events" -> TopBarActionType.MY_EVENTS
+        "Account" -> TopBarActionType.PROFILE
+        else -> TopBarActionType.NONE
     }
 }
