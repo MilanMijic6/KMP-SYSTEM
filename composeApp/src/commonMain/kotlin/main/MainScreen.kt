@@ -26,6 +26,7 @@ import main.tabs.MyEventsTab
 import main.tabs.ProfileTab
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import ui.ColorPurple
 import ui.ColorPurple75
 import util.TabNavigationItem
 import util.TopBarActionType
@@ -49,11 +50,9 @@ class MainScreen(
             Scaffold(
                 topBar = {
                     TopBarHeader(
-                        modifier = Modifier
-                            .padding(
-                                end = 16.dp
-                            ),
+                        titleColor = getToolbarTitleColor(it.current),
                         title = getToolbarTitle(it.current),
+                        backgroundColor = getToolbarActionColor(it.current),
                         navigationActionType = getToolbarActionIcon(it.current),
                         //todo use real logic later
                         isLoggedIn = true,
@@ -111,5 +110,25 @@ private fun getToolbarActionIcon(tabName: Tab): TopBarActionType     {
         "My events" -> TopBarActionType.MY_EVENTS
         "Account" -> TopBarActionType.PROFILE
         else -> TopBarActionType.NONE
+    }
+}
+
+@Composable
+private fun getToolbarActionColor(tabName: Tab): Color     {
+    return when (tabName.options.title) {
+        "Home" -> Color.White
+        "My events" -> Color.White
+        "Account" -> ColorPurple
+        else -> Color.White
+    }
+}
+
+@Composable
+private fun getToolbarTitleColor(tabName: Tab): Color     {
+    return when (tabName.options.title) {
+        "Home" -> Color.Black
+        "My events" -> Color.Black
+        "Account" -> Color.White
+        else -> Color.Black
     }
 }

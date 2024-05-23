@@ -1,13 +1,13 @@
 package util
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,9 +24,9 @@ import ui.FontSemiBold
 @ExperimentalMaterial3Api
 @Composable
 fun TopBarHeader(
-    modifier: Modifier = Modifier,
+    titleColor: Color = Color.Black,
     title: String,
-    color: Color = Color.White,
+    backgroundColor: Color = Color.White,
     isLoggedIn: Boolean = false,
     navigationActionType: TopBarActionType = TopBarActionType.NONE,
     onIconClick: () -> Unit
@@ -37,12 +37,15 @@ fun TopBarHeader(
                 text = title,
                 fontSize = 32.sp,
                 fontFamily = FontSemiBold(),
-                color = Color.Black
+                color = titleColor
             )
         },
-        modifier = modifier
-            .background(
-                color = color
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = backgroundColor
+        ),
+        modifier = Modifier
+            .padding(
+                end = if (navigationActionType != TopBarActionType.PROFILE) 16.dp else 0.dp
             ),
         actions = {
             if (navigationActionType == TopBarActionType.EVENTS && isLoggedIn) {
@@ -72,8 +75,11 @@ fun TopBarHeader(
             } else if (navigationActionType == TopBarActionType.PROFILE) {
                 LinkText(
                     text = stringResource(Res.string.logout),
-                    color = Color.Black,
+                    color = Color.White,
                     modifier = Modifier
+                        .padding(
+                            end = 16.dp
+                        )
                         .clickable {
                             onIconClick()
                         }
