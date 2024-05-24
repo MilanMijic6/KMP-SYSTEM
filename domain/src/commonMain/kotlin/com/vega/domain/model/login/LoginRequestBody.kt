@@ -1,9 +1,10 @@
 package com.vega.domain.model.login
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginRequestBody(
-    val email: String,
-    val password: String
+    @SerialName("Email") val email: String,
+    @SerialName("Password") val password: String
 )
