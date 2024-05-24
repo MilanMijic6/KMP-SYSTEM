@@ -15,17 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import auth.register.RegisterScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.email
 import eventhubapplication.composeapp.generated.resources.log_in
 import eventhubapplication.composeapp.generated.resources.password
 import eventhubapplication.composeapp.generated.resources.sign_in_anonymous
-import eventhubapplication.composeapp.generated.resources.sign_up
 import main.MainScreen
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject

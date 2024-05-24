@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,7 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import auth.login.LoginScreen
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.anonymous_sign
 import eventhubapplication.composeapp.generated.resources.email
@@ -25,6 +27,7 @@ import eventhubapplication.composeapp.generated.resources.password
 import eventhubapplication.composeapp.generated.resources.sign_up
 import main.MainScreen
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 import ui.ColorLightGray
 import ui.ColorPurple
 import util.ClickableText
@@ -34,18 +37,35 @@ import util.PurpleButton
 import util.RoundedTextInput
 import util.RoundedTextInputPassword
 
-class RegisterScreen(
-    val navigator: Navigator
-) : Screen {
+class RegisterScreen : Screen {
 
     @Composable
     override fun Content() {
-        ShowMainContent(navigator = navigator)
+        val registerViewModel: RegisterViewModel = koinInject()
+        val handleEvent: (RegisterContract.Event) -> Unit = { registerViewModel.handleEvents(it) }
+        val navigator = LocalNavigator.currentOrThrow
+        ShowMainContent(
+            handleEvent = handleEvent
+        )
+        LaunchedEffect(Unit) {
+            registerViewModel.effect.collect {
+                when (it) {
+                    RegisterContract.Effect.NavigateToMainScreen -> navigator.push(
+                        MainScreen(
+                            navigator
+                        )
+                    )
+                    RegisterContract.Effect.NavigateToLoginScreen -> navigator.push(
+                        LoginScreen()
+                    )
+                }
+            }
+        }
     }
 
     @Composable
     private fun ShowMainContent(
-        navigator: Navigator
+        handleEvent: (RegisterContract.Event) -> Unit
     ) {
         Surface(
             modifier = Modifier
@@ -74,7 +94,11 @@ class RegisterScreen(
                         .padding(
                             horizontal = 16.dp
                         )
-                )
+                ) {
+                    handleEvent(
+                        RegisterContract.Event.RoleEnterEvent(it)
+                    )
+                }
                 RoundedTextInput(
                     modifier = Modifier
                         .padding(
@@ -82,7 +106,9 @@ class RegisterScreen(
                         ),
                     text = stringResource(Res.string.name)
                 ) {
-
+                    handleEvent(
+                        RegisterContract.Event.NameEnterEvent(it)
+                    )
                 }
                 RoundedTextInput(
                     modifier = Modifier
@@ -91,7 +117,9 @@ class RegisterScreen(
                         ),
                     text = stringResource(Res.string.email)
                 ) {
-
+                    handleEvent(
+                        RegisterContract.Event.EmailEnterEvent(it)
+                    )
                 }
                 RoundedTextInputPassword(
                     modifier = Modifier
@@ -100,7 +128,9 @@ class RegisterScreen(
                         ),
                     text = stringResource(Res.string.password)
                 ) {
-
+                    handleEvent(
+                        RegisterContract.Event.PasswordEnterEvent(it)
+                    )
                 }
                 ClickableText(
                     text = stringResource(Res.string.anonymous_sign),
@@ -112,8 +142,9 @@ class RegisterScreen(
                             bottom = 40.dp
                         )
                 ) {
-                    //todo add real logic
-                    navigator.push(MainScreen(navigator))
+                    handleEvent(
+                        RegisterContract.Event.LoginAnonymouslyEvent
+                    )
                 }
                 PurpleButton(
                     text = stringResource(Res.string.sign_up),
@@ -122,8 +153,9 @@ class RegisterScreen(
                             16.dp
                         )
                 ) {
-                    //todo add real logic
-                    navigator.push(MainScreen(navigator))
+                    handleEvent(
+                        RegisterContract.Event.RegisterUserEvent
+                    )
                 }
                 ClickableText(
                     text = stringResource(Res.string.login),
@@ -133,8 +165,9 @@ class RegisterScreen(
                         bottom = 20.dp
                     )
                 ) {
-                    //todo add real logic
-                    navigator.push(LoginScreen())
+                    handleEvent(
+                        RegisterContract.Event.LoginScreenEvent
+                    )
                 }
             }
         }

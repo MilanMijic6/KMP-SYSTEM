@@ -12,6 +12,6 @@ fun setInitState(): RegisterScreenModel = RegisterScreenModel(
     email = "",
     password = "",
     name = "",
-    role = "",
+    role = "Attendee",
     errorMsg = ""
 )

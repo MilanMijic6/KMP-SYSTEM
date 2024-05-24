@@ -31,7 +31,8 @@ import ui.TextGray
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropdownMenu(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit
 ) {
     val options = listOf("Attendee", "Creator")
     var expanded by remember { mutableStateOf(false) }
@@ -91,6 +92,7 @@ fun DropdownMenu(
                         onClick = {
                             selectedOption = selectionOption
                             expanded = false
+                            onClick.invoke(selectionOption)
                         }
                     )
                 }

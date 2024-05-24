@@ -32,7 +32,7 @@ class SplashScreen : Screen {
         LaunchedEffect(Unit) {
             splashScreenViewModel.effect.collect {
                 when (it) {
-                    SplashContract.Effect.NavigateToRegisterScreen -> navigator.push(RegisterScreen(navigator))
+                    SplashContract.Effect.NavigateToRegisterScreen -> navigator.push(RegisterScreen())
                     SplashContract.Effect.NavigateToMainScreen -> navigator.push(MainScreen(navigator))
                 }
             }
