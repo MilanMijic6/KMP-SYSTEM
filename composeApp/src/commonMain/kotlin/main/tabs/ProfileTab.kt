@@ -9,22 +9,20 @@ import cafe.adriel.voyager.transitions.FadeTransition
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_tab_profile
 import eventhubapplication.composeapp.generated.resources.tab_profile
-import main.profile.ProfileScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import main.profile.ProfileScreen
 
 class ProfileTab(
     val navigator: Navigator
 ) : Tab {
     @Composable
     override fun Content() {
-        Navigator(ProfileScreen()) {
+        Navigator(ProfileScreen(navigator)) {
             FadeTransition(it)
         }
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     override val options: TabOptions
         @Composable
         get() {

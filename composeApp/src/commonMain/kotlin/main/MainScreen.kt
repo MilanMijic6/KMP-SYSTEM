@@ -26,6 +26,7 @@ import main.tabs.MyEventsTab
 import main.tabs.ProfileTab
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import ui.ColorLightGray
 import ui.ColorPurple
 import ui.ColorPurple75
 import util.TabNavigationItem
@@ -46,14 +47,14 @@ class MainScreen(
     private fun ShowMainContent(
         navigator: Navigator
     ) {
-        TabNavigator(HomeTab(navigator)) {
+        TabNavigator(HomeTab(navigator)) { tabNavigator ->
             Scaffold(
                 topBar = {
                     TopBarHeader(
-                        titleColor = getToolbarTitleColor(it.current),
-                        title = getToolbarTitle(it.current),
-                        backgroundColor = getToolbarActionColor(it.current),
-                        navigationActionType = getToolbarActionIcon(it.current),
+                        titleColor = getToolbarTitleColor(tabNavigator.current),
+                        title = getToolbarTitle(tabNavigator.current),
+                        backgroundColor = getToolbarActionColor(tabNavigator.current),
+                        navigationActionType = getToolbarActionIcon(tabNavigator.current),
                         //todo use real logic later
                         isLoggedIn = true,
                         onIconClick = {}
@@ -77,12 +78,14 @@ class MainScreen(
                         TabNavigationItem(ProfileTab(navigator))
                     }
                 },
-                containerColor = Color.White
+                containerColor = ColorLightGray
             ) {
                 Column(
                     modifier = Modifier
                         .padding(
-                            top = it.calculateTopPadding()
+                            top = it.calculateTopPadding(),
+                            bottom = if (tabNavigator.current.options.title == "Home")
+                                0.dp else it.calculateBottomPadding()
                         )
                 ) {
                     CurrentTab()
@@ -104,7 +107,7 @@ private fun getToolbarTitle(tabName: Tab): String {
 }
 
 @Composable
-private fun getToolbarActionIcon(tabName: Tab): TopBarActionType     {
+private fun getToolbarActionIcon(tabName: Tab): TopBarActionType {
     return when (tabName.options.title) {
         "Home" -> TopBarActionType.EVENTS
         "My events" -> TopBarActionType.MY_EVENTS
@@ -114,17 +117,17 @@ private fun getToolbarActionIcon(tabName: Tab): TopBarActionType     {
 }
 
 @Composable
-private fun getToolbarActionColor(tabName: Tab): Color     {
+private fun getToolbarActionColor(tabName: Tab): Color {
     return when (tabName.options.title) {
-        "Home" -> Color.White
-        "My events" -> Color.White
+        "Home" -> ColorLightGray
+        "My events" -> ColorLightGray
         "Account" -> ColorPurple
-        else -> Color.White
+        else -> ColorLightGray
     }
 }
 
 @Composable
-private fun getToolbarTitleColor(tabName: Tab): Color     {
+private fun getToolbarTitleColor(tabName: Tab): Color {
     return when (tabName.options.title) {
         "Home" -> Color.Black
         "My events" -> Color.Black

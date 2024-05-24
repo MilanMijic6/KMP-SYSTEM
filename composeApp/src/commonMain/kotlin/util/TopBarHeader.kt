@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eventhubapplication.composeapp.generated.resources.Res
@@ -76,6 +77,7 @@ fun TopBarHeader(
                 LinkText(
                     text = stringResource(Res.string.logout),
                     color = Color.White,
+                    textAlign = TextAlign.End,
                     modifier = Modifier
                         .padding(
                             end = 16.dp

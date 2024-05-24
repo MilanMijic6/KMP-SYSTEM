@@ -24,8 +24,8 @@ import eventhubapplication.composeapp.generated.resources.name
 import eventhubapplication.composeapp.generated.resources.password
 import eventhubapplication.composeapp.generated.resources.sign_up
 import main.MainScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import ui.ColorLightGray
 import ui.ColorPurple
 import util.ClickableText
 import util.DropdownMenu
@@ -43,7 +43,6 @@ class RegisterScreen(
         ShowMainContent(navigator = navigator)
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     @Composable
     private fun ShowMainContent(
         navigator: Navigator
@@ -52,7 +51,7 @@ class RegisterScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            color = Color.White
+            color = ColorLightGray
         ) {
             Column(
                 modifier = Modifier
