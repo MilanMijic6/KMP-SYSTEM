@@ -34,7 +34,7 @@ import util.TopBarActionType
 import util.TopBarHeader
 
 class MainScreen(
-    val navigator: Navigator
+    private val navigator: Navigator
 ) : Screen {
 
     @Composable
@@ -75,7 +75,7 @@ class MainScreen(
                     ) {
                         TabNavigationItem(HomeTab(navigator))
                         TabNavigationItem(MyEventsTab(navigator))
-                        TabNavigationItem(ProfileTab(navigator))
+                        TabNavigationItem(ProfileTab())
                     }
                 },
                 containerColor = ColorLightGray

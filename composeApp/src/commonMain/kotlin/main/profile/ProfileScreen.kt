@@ -17,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.Navigator
 import ui.ColorLightGray
 import ui.ColorPurple
 import util.HeaderText
@@ -25,21 +24,15 @@ import util.LinkText
 import util.RoundedImage
 import util.RoundedTextInput
 
-class ProfileScreen(
-    val navigator: Navigator
-) : Screen {
+class ProfileScreen : Screen {
 
     @Composable
     override fun Content() {
-        ShowMainContent(
-            navigator = navigator
-        )
+        ShowMainContent()
     }
 
     @Composable
-    private fun ShowMainContent(
-        navigator: Navigator
-    ) {
+    private fun ShowMainContent() {
         Box(
             modifier = Modifier
                 .fillMaxSize()

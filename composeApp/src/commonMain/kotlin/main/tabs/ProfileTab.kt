@@ -13,12 +13,10 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import main.profile.ProfileScreen
 
-class ProfileTab(
-    val navigator: Navigator
-) : Tab {
+class ProfileTab : Tab {
     @Composable
     override fun Content() {
-        Navigator(ProfileScreen(navigator)) {
+        Navigator(ProfileScreen()) {
             FadeTransition(it)
         }
     }

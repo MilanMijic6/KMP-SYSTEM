@@ -10,7 +10,6 @@ import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_tab_calendar
 import eventhubapplication.composeapp.generated.resources.tab_my_events
 import main.myevents.MyEventsScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -24,7 +23,6 @@ class MyEventsTab(
         }
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     override val options: TabOptions
     @Composable
     get() {

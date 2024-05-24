@@ -8,10 +8,8 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import cafe.adriel.voyager.transitions.FadeTransition
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_tab_home
-import eventhubapplication.composeapp.generated.resources.profile
 import eventhubapplication.composeapp.generated.resources.tab_home
 import main.home.HomeScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -25,7 +23,6 @@ class HomeTab(
         }
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     override val options: TabOptions
         @Composable
         get() {
