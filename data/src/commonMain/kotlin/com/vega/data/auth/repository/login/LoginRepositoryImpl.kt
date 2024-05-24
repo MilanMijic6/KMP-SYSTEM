@@ -10,7 +10,7 @@ import io.ktor.client.call.body
 class LoginRepositoryImpl(
     private val loginApi: LoginApi,
     private val settingsStorage: SettingsStorage
-): LoginRepository {
+) : LoginRepository {
     override suspend fun isLoggedIn(): Boolean = settingsStorage.getToken().isNotEmpty()
 
     override suspend fun isLoggedInAnonymously(): Boolean = settingsStorage.getAnonymousUser()
@@ -24,4 +24,7 @@ class LoginRepositoryImpl(
             settingsStorage.saveToken(it)
         }.getOrThrow()
     }
+
+    override suspend fun loginUserAnonymously() =
+        settingsStorage.saveAnonymousUser(anonymous = true)
 }

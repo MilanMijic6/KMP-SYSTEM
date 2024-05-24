@@ -8,4 +8,6 @@ interface LoginRepository {
     suspend fun isLoggedInAnonymously(): Boolean
 
     suspend fun loginUser(credentials: LoginRequestBody)
+
+    suspend fun loginUserAnonymously()
 }

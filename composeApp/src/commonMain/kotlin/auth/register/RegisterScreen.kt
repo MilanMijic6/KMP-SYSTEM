@@ -134,7 +134,7 @@ class RegisterScreen(
                     )
                 ) {
                     //todo add real logic
-                    navigator.push(LoginScreen(navigator))
+                    navigator.push(LoginScreen())
                 }
             }
         }

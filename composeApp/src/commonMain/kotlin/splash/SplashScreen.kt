@@ -12,7 +12,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import auth.login.LoginScreen
 import auth.register.RegisterScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -20,7 +19,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_logo
 import main.MainScreen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 
@@ -42,7 +40,6 @@ class SplashScreen : Screen {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun ShowSplashContent() {
     Box(
