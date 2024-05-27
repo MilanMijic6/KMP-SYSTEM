@@ -29,7 +29,7 @@ class UpcomingEventsViewModel(
                 setState {
                     UpcomingEventsContract.State.Success(
                         viewState.value.upcomingEventListScreenModel.copy(
-                            upcomingEvents = it
+                            upcomingEvents = it.data
                         )
                     )
                 }
