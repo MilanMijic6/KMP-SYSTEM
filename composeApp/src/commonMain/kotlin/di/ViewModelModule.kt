@@ -2,6 +2,7 @@ package di
 
 import auth.login.LoginViewModel
 import auth.register.RegisterViewModel
+import main.home.UpcomingEventsViewModel
 import org.koin.dsl.module
 import splash.SplashViewModel
 
@@ -23,6 +24,11 @@ val viewModelModule = module {
             registerUseCase = get(),
             loginUseCase = get(),
             loginUserAnonymouslyUseCase = get()
+        )
+    }
+    factory {
+        UpcomingEventsViewModel(
+            getUpcomingEventsUseCase = get()
         )
     }
 }

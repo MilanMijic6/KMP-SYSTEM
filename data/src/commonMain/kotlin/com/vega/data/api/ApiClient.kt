@@ -10,4 +10,6 @@ interface ApiClient {
 
     suspend fun register(endpoint: String, params: RegisterRequestBody) : HttpResponse
 
+    suspend fun getUpcomingEvents(endpoint: String, page: Int, pageSize: Int): HttpResponse
+
 }

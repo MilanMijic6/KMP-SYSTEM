@@ -2,6 +2,8 @@ package com.vega.di
 
 import com.vega.data.auth.repository.login.LoginRepositoryImpl
 import com.vega.data.auth.repository.register.RegisterRepositoryImpl
+import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
+import com.vega.domain.usecase.events.GetUpcomingEventsUseCase
 import com.vega.domain.usecase.login.IsAnonymouslyLoggedInUserUseCase
 import com.vega.domain.usecase.login.IsLoggedInUserUseCase
 import com.vega.domain.usecase.login.LoginUserAnonymouslyUseCase
@@ -33,6 +35,11 @@ val useCaseModule = module {
     single {
         RegisterUserUseCase(
             get<RegisterRepositoryImpl>()
+        )
+    }
+    single {
+        GetUpcomingEventsUseCase(
+            get<UpcomingEventsRepositoryImpl>()
         )
     }
 }

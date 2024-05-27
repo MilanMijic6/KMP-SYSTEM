@@ -75,7 +75,7 @@ class MainScreen(
                     ) {
                         TabNavigationItem(HomeTab(navigator))
                         TabNavigationItem(MyEventsTab(navigator))
-                        TabNavigationItem(ProfileTab())
+                        TabNavigationItem(ProfileTab)
                     }
                 },
                 containerColor = ColorLightGray

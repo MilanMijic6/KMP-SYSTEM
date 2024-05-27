@@ -13,7 +13,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import main.profile.ProfileScreen
 
-class ProfileTab : Tab {
+object ProfileTab : Tab {
     @Composable
     override fun Content() {
         Navigator(ProfileScreen()) {

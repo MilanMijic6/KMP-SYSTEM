@@ -4,7 +4,8 @@ object Constants {
 
     //rest
     const val BEARER = "Bearer"
-    const val VALUE = "value"
+    const val PAGE_NUMBER = "PaginationFilter.PageNumber"
+    const val PAGE_SIZE = "PaginationFilter.PageSize"
 
     //preference
     const val KEY_TOKEN = "pref_token"
