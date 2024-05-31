@@ -1,16 +1,19 @@
 package com.vega.data.api
 
 import com.vega.data.BASE_URL
+import com.vega.data.Constants
 import com.vega.data.Constants.PAGE_NUMBER
 import com.vega.data.Constants.PAGE_SIZE
 import com.vega.domain.model.login.LoginRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
 
 class ApiClientImpl(
@@ -41,4 +44,12 @@ class ApiClientImpl(
             parameters.append(PAGE_SIZE, pageSize.toString())
         }
     }
+
+    override suspend fun getUser(endpoint: String, token: String) =
+        httpClient.get {
+            url(BASE_URL + endpoint)
+            headers {
+                append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+            }
+        }
 }

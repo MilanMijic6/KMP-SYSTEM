@@ -7,6 +7,8 @@ import com.vega.data.auth.repository.register.RegisterRepositoryImpl
 import com.vega.data.auth.storage.SettingsStorageImpl
 import com.vega.data.events.remote.UpcomingEventsApiImpl
 import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
+import com.vega.data.profile.remote.ProfileApiImpl
+import com.vega.data.profile.repository.ProfileRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -24,6 +26,12 @@ val repositoryModule = module {
     single {
         UpcomingEventsRepositoryImpl(
             get<UpcomingEventsApiImpl>()
+        )
+    }
+    single {
+        ProfileRepositoryImpl(
+            get<ProfileApiImpl>(),
+            get<SettingsStorageImpl>()
         )
     }
 }

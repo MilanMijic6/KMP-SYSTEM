@@ -12,4 +12,6 @@ interface ApiClient {
 
     suspend fun getUpcomingEvents(endpoint: String, page: Int, pageSize: Int): HttpResponse
 
+    suspend fun getUser(endpoint: String, token: String): HttpResponse
+
 }
