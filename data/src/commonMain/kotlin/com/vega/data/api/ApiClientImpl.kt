@@ -52,4 +52,22 @@ class ApiClientImpl(
                 append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
             }
         }
+
+    override suspend fun getEventDetails(endpoint: String, token: String) =
+        httpClient.get(BASE_URL + endpoint) {
+            url(BASE_URL + endpoint)
+            contentType(ContentType.Application.Json)
+            headers {
+                append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+            }
+        }
+
+    override suspend fun reserveEvent(endpoint: String, token: String) =
+        httpClient.get(BASE_URL + endpoint) {
+            url(BASE_URL + endpoint)
+            contentType(ContentType.Application.Json)
+            headers {
+                append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+            }
+        }
 }

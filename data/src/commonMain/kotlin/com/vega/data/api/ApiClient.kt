@@ -14,4 +14,8 @@ interface ApiClient {
 
     suspend fun getUser(endpoint: String, token: String): HttpResponse
 
+    suspend fun getEventDetails(endpoint: String, token: String): HttpResponse
+
+    suspend fun reserveEvent(endpoint: String, token: String): HttpResponse
+
 }
