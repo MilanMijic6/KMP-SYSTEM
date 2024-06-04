@@ -11,4 +11,17 @@ class ProfileApiImpl(
             endpoint = "api/Users",
             token = token
         )
+
+    override suspend fun updateUser(
+        token: String,
+        name: String,
+        email: String,
+        profilePicture: String
+    ): HttpResponse = apiClient.updateUser(
+        endpoint = "api/Users/updateUser",
+        token = token,
+        name = name,
+        email = email,
+        profilePicture = profilePicture
+    )
 }

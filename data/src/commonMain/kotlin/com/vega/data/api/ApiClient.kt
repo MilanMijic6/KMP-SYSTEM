@@ -18,4 +18,6 @@ interface ApiClient {
 
     suspend fun reserveEvent(endpoint: String, token: String): HttpResponse
 
+    suspend fun updateUser(endpoint: String, token: String, name: String, email: String, profilePicture: String): HttpResponse
+
 }

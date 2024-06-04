@@ -6,4 +6,8 @@ interface ProfileRepository {
 
     suspend fun getUser(): User
 
+    suspend fun updateUser(name: String, email: String, profilePicture: String)
+
+    suspend fun logout()
+
 }

@@ -20,4 +20,21 @@ class ProfileRepositoryImpl(
         }.mapCatching {
             it.body<UserDto>().toUser()
         }.getOrThrow()
+
+    override suspend fun updateUser(name: String, email: String, profilePicture: String) {
+        runCatching {
+            storage.getToken()
+        }.mapCatching {
+            api.updateUser(
+                token = it,
+                name = name,
+                email = email,
+                profilePicture = profilePicture
+            )
+        }
+    }
+
+    override suspend fun logout() {
+        storage.removeToken()
+    }
 }
