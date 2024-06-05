@@ -5,7 +5,9 @@ import com.vega.data.auth.repository.register.RegisterRepositoryImpl
 import com.vega.data.event_details.repository.EventDetailsRepositoryImpl
 import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
 import com.vega.data.profile.repository.ProfileRepositoryImpl
+import com.vega.data.update_event.repository.UpdateEventRepositoryImpl
 import com.vega.domain.repository.profile.ProfileRepository
+import com.vega.domain.usecase.event_details.DeleteEventUseCase
 import com.vega.domain.usecase.event_details.GetEventDetailsUseCase
 import com.vega.domain.usecase.event_details.ReserveEventDetailsUseCase
 import com.vega.domain.usecase.events.GetUpcomingEventsUseCase
@@ -17,6 +19,7 @@ import com.vega.domain.usecase.profile.GetUserUseCase
 import com.vega.domain.usecase.profile.LogoutUseCase
 import com.vega.domain.usecase.profile.UpdateUserUseCase
 import com.vega.domain.usecase.register.RegisterUserUseCase
+import com.vega.domain.usecase.update_event.UpdateEventUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -73,6 +76,16 @@ val useCaseModule = module {
     single {
         UpdateUserUseCase(
             get<ProfileRepository>()
+        )
+    }
+    single {
+        DeleteEventUseCase(
+            get<EventDetailsRepositoryImpl>()
+        )
+    }
+    single {
+        UpdateEventUseCase(
+            get<UpdateEventRepositoryImpl>()
         )
     }
 }

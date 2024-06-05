@@ -6,5 +6,6 @@ interface EventDetailsApi {
 
     suspend fun getEvent(id: String, token: String): HttpResponse
     suspend fun reserveEvent(token: String, eventId: String): HttpResponse
+    suspend fun deleteEvent(token: String, id: String): HttpResponse
 
 }

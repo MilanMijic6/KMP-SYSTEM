@@ -34,4 +34,15 @@ class EventDetailsRepositoryImpl(
             )
         }
     }
+
+    override suspend fun deleteEvent(id: String) {
+        runCatching {
+            storage.getToken()
+        }.mapCatching {
+            api.deleteEvent(
+                id = id,
+                token = it
+            )
+        }
+    }
 }

@@ -6,6 +6,7 @@ import com.vega.data.auth.remote.register.RegisterApiImpl
 import com.vega.data.event_details.remote.EventDetailsApiIMpl
 import com.vega.data.events.remote.UpcomingEventsApiImpl
 import com.vega.data.profile.remote.ProfileApiImpl
+import com.vega.data.update_event.remote.UpdateEventApiImpl
 import org.koin.dsl.module
 
 val apiModule = module {
@@ -26,5 +27,8 @@ val apiModule = module {
     }
     single {
         EventDetailsApiIMpl(get())
+    }
+    single {
+        UpdateEventApiImpl(get())
     }
 }

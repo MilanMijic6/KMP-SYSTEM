@@ -9,15 +9,15 @@ import com.vega.data.Constants.PAGE_SIZE
 import com.vega.data.Constants.PROFILE_PICTURE
 import com.vega.domain.model.login.LoginRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
+import com.vega.domain.model.update_event.UpdateEventRequestBody
 import io.ktor.client.HttpClient
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
-import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
-import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.contentType
@@ -93,5 +93,26 @@ class ApiClientImpl(
             parameters.append(EMAIL, email)
             parameters.append(PROFILE_PICTURE, profilePicture)
         }
+    }
+
+    override suspend fun deleteEvent(endpoint: String, token: String) =
+        httpClient.delete(BASE_URL + endpoint) {
+            url(BASE_URL + endpoint)
+            contentType(ContentType.Application.Json)
+            headers {
+                append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+            }
+        }
+
+    override suspend fun updateEvent(
+        endpoint: String,
+        token: String,
+        params: UpdateEventRequestBody
+    ) = httpClient.put {
+        url(BASE_URL + endpoint)
+        headers {
+            append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+        }
+        setBody(params)
     }
 }

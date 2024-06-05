@@ -18,4 +18,10 @@ class EventDetailsApiIMpl (
             endpoint = "reserve/${eventId}",
             token = token
         )
+
+    override suspend fun deleteEvent(token: String, id: String): HttpResponse =
+        apiClient.deleteEvent(
+            endpoint = "api/Events/deleteEvent/${id}",
+            token = token
+        )
 }
