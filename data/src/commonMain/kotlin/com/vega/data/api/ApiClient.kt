@@ -35,4 +35,6 @@ interface ApiClient {
         params: UpdateEventRequestBody
     ): HttpResponse
 
+    suspend fun getMyEvents(endpoint: String, token: String, page: Int, pageSize: Int): HttpResponse
+
 }

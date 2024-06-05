@@ -4,6 +4,7 @@ import com.vega.data.auth.repository.login.LoginRepositoryImpl
 import com.vega.data.auth.repository.register.RegisterRepositoryImpl
 import com.vega.data.event_details.repository.EventDetailsRepositoryImpl
 import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
+import com.vega.data.my_events.repository.MyEventsRepositoryImpl
 import com.vega.data.profile.repository.ProfileRepositoryImpl
 import com.vega.data.update_event.repository.UpdateEventRepositoryImpl
 import com.vega.domain.repository.profile.ProfileRepository
@@ -15,6 +16,7 @@ import com.vega.domain.usecase.login.IsAnonymouslyLoggedInUserUseCase
 import com.vega.domain.usecase.login.IsLoggedInUserUseCase
 import com.vega.domain.usecase.login.LoginUserAnonymouslyUseCase
 import com.vega.domain.usecase.login.LoginUserUseCase
+import com.vega.domain.usecase.my_events.GetMyEventsUseCase
 import com.vega.domain.usecase.profile.GetUserUseCase
 import com.vega.domain.usecase.profile.LogoutUseCase
 import com.vega.domain.usecase.profile.UpdateUserUseCase
@@ -86,6 +88,11 @@ val useCaseModule = module {
     single {
         UpdateEventUseCase(
             get<UpdateEventRepositoryImpl>()
+        )
+    }
+    single {
+        GetMyEventsUseCase(
+            get<MyEventsRepositoryImpl>()
         )
     }
 }

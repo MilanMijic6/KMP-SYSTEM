@@ -115,4 +115,20 @@ class ApiClientImpl(
         }
         setBody(params)
     }
+
+    override suspend fun getMyEvents(
+        endpoint: String,
+        token: String,
+        page: Int,
+        pageSize: Int
+    ) = httpClient.get {
+        url(BASE_URL + endpoint)
+        url {
+            parameters.append(PAGE_NUMBER, page.toString())
+            parameters.append(PAGE_SIZE, pageSize.toString())
+        }
+        headers {
+            append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+        }
+    }
 }

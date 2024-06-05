@@ -9,9 +9,10 @@ import com.vega.data.event_details.remote.EventDetailsApiIMpl
 import com.vega.data.event_details.repository.EventDetailsRepositoryImpl
 import com.vega.data.events.remote.UpcomingEventsApiImpl
 import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
+import com.vega.data.my_events.remote.MyEventsApiImpl
+import com.vega.data.my_events.repository.MyEventsRepositoryImpl
 import com.vega.data.profile.remote.ProfileApiImpl
 import com.vega.data.profile.repository.ProfileRepositoryImpl
-import com.vega.data.update_event.remote.UpdateEventApi
 import com.vega.data.update_event.remote.UpdateEventApiImpl
 import com.vega.data.update_event.repository.UpdateEventRepositoryImpl
 import org.koin.dsl.module
@@ -48,6 +49,12 @@ val repositoryModule = module {
     single {
         UpdateEventRepositoryImpl(
             get<UpdateEventApiImpl>(),
+            get<SettingsStorageImpl>()
+        )
+    }
+    single {
+        MyEventsRepositoryImpl(
+            get<MyEventsApiImpl>(),
             get<SettingsStorageImpl>()
         )
     }
