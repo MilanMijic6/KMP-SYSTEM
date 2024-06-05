@@ -2,12 +2,14 @@ package com.vega.di
 
 import com.vega.data.auth.repository.login.LoginRepositoryImpl
 import com.vega.data.auth.repository.register.RegisterRepositoryImpl
+import com.vega.data.create_event.repository.CreateEventRepositoryImpl
 import com.vega.data.event_details.repository.EventDetailsRepositoryImpl
 import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
 import com.vega.data.my_events.repository.MyEventsRepositoryImpl
 import com.vega.data.profile.repository.ProfileRepositoryImpl
 import com.vega.data.update_event.repository.UpdateEventRepositoryImpl
 import com.vega.domain.repository.profile.ProfileRepository
+import com.vega.domain.usecase.create_event.CreateEventUseCase
 import com.vega.domain.usecase.event_details.DeleteEventUseCase
 import com.vega.domain.usecase.event_details.GetEventDetailsUseCase
 import com.vega.domain.usecase.event_details.ReserveEventDetailsUseCase
@@ -93,6 +95,11 @@ val useCaseModule = module {
     single {
         GetMyEventsUseCase(
             get<MyEventsRepositoryImpl>()
+        )
+    }
+    single {
+        CreateEventUseCase(
+            get<CreateEventRepositoryImpl>()
         )
     }
 }

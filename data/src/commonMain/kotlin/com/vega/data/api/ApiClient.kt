@@ -1,5 +1,6 @@
 package com.vega.data.api
 
+import com.vega.domain.model.create_event.CreateEventRequestBody
 import com.vega.domain.model.login.LoginRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
 import com.vega.domain.model.update_event.UpdateEventRequestBody
@@ -36,5 +37,11 @@ interface ApiClient {
     ): HttpResponse
 
     suspend fun getMyEvents(endpoint: String, token: String, page: Int, pageSize: Int): HttpResponse
+
+    suspend fun createEvent(
+        endpoint: String,
+        token: String,
+        params: CreateEventRequestBody
+    ): HttpResponse
 
 }

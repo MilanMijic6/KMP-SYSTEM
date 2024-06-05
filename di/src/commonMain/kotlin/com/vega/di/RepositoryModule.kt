@@ -5,6 +5,8 @@ import com.vega.data.auth.remote.register.RegisterApiImpl
 import com.vega.data.auth.repository.login.LoginRepositoryImpl
 import com.vega.data.auth.repository.register.RegisterRepositoryImpl
 import com.vega.data.auth.storage.SettingsStorageImpl
+import com.vega.data.create_event.remote.CreateEventApiImpl
+import com.vega.data.create_event.repository.CreateEventRepositoryImpl
 import com.vega.data.event_details.remote.EventDetailsApiIMpl
 import com.vega.data.event_details.repository.EventDetailsRepositoryImpl
 import com.vega.data.events.remote.UpcomingEventsApiImpl
@@ -55,6 +57,12 @@ val repositoryModule = module {
     single {
         MyEventsRepositoryImpl(
             get<MyEventsApiImpl>(),
+            get<SettingsStorageImpl>()
+        )
+    }
+    single {
+        CreateEventRepositoryImpl(
+            get<CreateEventApiImpl>(),
             get<SettingsStorageImpl>()
         )
     }

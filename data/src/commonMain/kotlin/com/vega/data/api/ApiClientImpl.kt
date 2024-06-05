@@ -7,6 +7,7 @@ import com.vega.data.Constants.NAME
 import com.vega.data.Constants.PAGE_NUMBER
 import com.vega.data.Constants.PAGE_SIZE
 import com.vega.data.Constants.PROFILE_PICTURE
+import com.vega.domain.model.create_event.CreateEventRequestBody
 import com.vega.domain.model.login.LoginRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
 import com.vega.domain.model.update_event.UpdateEventRequestBody
@@ -130,5 +131,17 @@ class ApiClientImpl(
         headers {
             append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
         }
+    }
+
+    override suspend fun createEvent(
+        endpoint: String,
+        token: String,
+        params: CreateEventRequestBody
+    ) = httpClient.post {
+        url(BASE_URL + endpoint)
+        headers {
+            append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
+        }
+        setBody(params)
     }
 }
