@@ -6,21 +6,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import com.vega.domain.model.events.UpcomingEvent
+import eventhubapplication.composeapp.generated.resources.Res
+import eventhubapplication.composeapp.generated.resources.event_image
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.koin.compose.koinInject
+import ui.ColorGreen
+import ui.ColorRed
+import ui.ColorWhite
+import util.EventListItem
 import util.Loader
 
-class HomeScreen() : Screen {
+class HomeScreen : Screen {
 
     @Composable
     override fun Content() {
         val viewModel: UpcomingEventsViewModel = koinInject()
         when (val state = viewModel.viewState.value) {
             is UpcomingEventsContract.State.Error -> {
-                //todo handle error loading
+                //remove later
+                SuccessLoaded(
+                    viewModel = viewModel,
+                    upcomingEvents = state.upcomingEventListScreenModel.upcomingEvents
+                )
             }
 
             is UpcomingEventsContract.State.Init -> {
@@ -55,13 +66,44 @@ class HomeScreen() : Screen {
         Column(
             modifier = Modifier
                 .padding(end = 26.dp)
-                .fillMaxHeight()
+                .fillMaxHeight(),
         ) {
             /*CryptoList(
                 cryptoList = upcomingEvents
             ) {
                 viewModel.handleEvents(UpcomingEventsContract.Event.SelectUpcomingEventItem(it))
             }*/
+            Column {
+                EventListItem(
+                    imageResource = Res.drawable.event_image,
+                    labelText = "Internation Band Music Concert",
+                    iconLabelText = "36 Guild Street London, UK",
+                    titleColor = Color.White,
+                    textInBoxFirstLabel = "10",
+                    textInBoxSecondLabel = "JUNE",
+                    backgroundColor = ColorRed
+                )
+
+                EventListItem(
+                    imageResource = Res.drawable.event_image,
+                    labelText = "Internation Band Music Concert",
+                    iconLabelText = "36 Guild Street London, UK",
+                    titleColor = Color.White,
+                    textInBoxFirstLabel = "18",
+                    textInBoxSecondLabel = "JUNE",
+                    backgroundColor = ColorGreen
+                )
+
+                EventListItem(
+                    imageResource = Res.drawable.event_image,
+                    labelText = "Internation Band Music Concert",
+                    iconLabelText = "36 Guild Street London, UK",
+                    titleColor = Color.Black,
+                    textInBoxFirstLabel = "10",
+                    textInBoxSecondLabel = "JULY",
+                    backgroundColor = ColorWhite
+                )
+            }
         }
     }
 }

@@ -7,8 +7,8 @@ import com.vega.di.repositoryModule
 import com.vega.di.settingsStorageModule
 import com.vega.di.useCaseModule
 import di.viewModelModule
-import main.eventdetails.EventDetailsScreen
 import org.koin.compose.KoinApplication
+import splash.SplashScreen
 
 @Composable
 fun App() {
@@ -20,7 +20,7 @@ fun App() {
         },
     ) {
         Navigator(
-            screen = EventDetailsScreen()
+            screen = SplashScreen()
         ) {
             SlideTransition(it)
         }
