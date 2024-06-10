@@ -8,7 +8,6 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 
-
 interface ViewEvent
 interface ViewState
 interface ViewSideEffect

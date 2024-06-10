@@ -7,7 +7,6 @@ import com.vega.di.repositoryModule
 import com.vega.di.settingsStorageModule
 import com.vega.di.useCaseModule
 import di.viewModelModule
-import main.filter.FilterScreen
 import org.koin.compose.KoinApplication
 import splash.SplashScreen
 
@@ -21,7 +20,7 @@ fun App() {
         },
     ) {
         Navigator(
-            screen = FilterScreen()
+            screen = SplashScreen()
         ) {
             SlideTransition(it)
         }

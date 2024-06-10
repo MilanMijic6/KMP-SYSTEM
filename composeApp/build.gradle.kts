@@ -55,6 +55,7 @@ kotlin {
                 implementation(libs.voyager.transitions)
                 implementation(libs.voyager.tab.navigator)
                 implementation(libs.cafe.voyager.koin)
+                implementation("com.google.zxing:core:3.4.1")
             }
         }
 
@@ -64,6 +65,7 @@ kotlin {
                 implementation(libs.compose.ui.tooling.preview)
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.koin.android)
+                implementation("com.google.zxing:core:3.4.1")
             }
         }
 
