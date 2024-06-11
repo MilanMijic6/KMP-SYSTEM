@@ -13,6 +13,7 @@ class MainContract {
         data object ClickOnFilterEvent : Event()
         data object ClickOnScanEvent : Event()
         data object ClickOnLogoutEvent : Event()
+        data object ClickOnDialogButtonEvent: Event()
     }
 
     sealed class State : ViewState {
@@ -41,5 +42,7 @@ class MainContract {
         data object LogoutUser: Effect()
 
         data object ShowLoginDialog : Effect()
+
+        data object NavigateToLoginScreen : Effect()
     }
 }

@@ -9,10 +9,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import auth.login.LoginScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.CurrentTab
@@ -31,6 +34,7 @@ import org.koin.compose.koinInject
 import ui.ColorLightGray
 import ui.ColorPurple
 import ui.ColorPurple75
+import util.CenteredDialog
 import util.TabNavigationItem
 import util.TopBarActionType
 import util.TopBarHeader
@@ -109,6 +113,21 @@ private fun populateBottomTabs(
     tabNavigator: TabNavigator,
     viewModel: MainViewModel
 ) {
+    val shouldShowDialog = remember { mutableStateOf(false) }
+    if (shouldShowDialog.value) {
+        CenteredDialog(
+            title = "You need to be logged in!",
+            buttonText = "Login",
+            descriptionText = "Dismiss",
+            onNegativeClick = {
+                shouldShowDialog.value = false
+            },
+            onPositiveClick = {
+                shouldShowDialog.value = false
+                viewModel.handleEvents(MainContract.Event.ClickOnDialogButtonEvent)
+            }
+        )
+    }
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
@@ -121,7 +140,7 @@ private fun populateBottomTabs(
                     MyEventsTab(navigator)
 
                 MainContract.Effect.ShowLoginDialog -> {
-
+                    shouldShowDialog.value = true
                 }
 
                 MainContract.Effect.LogoutUser -> {
@@ -130,6 +149,10 @@ private fun populateBottomTabs(
 
                 MainContract.Effect.NavigateToScanScreen -> {
 
+                }
+
+                MainContract.Effect.NavigateToLoginScreen -> {
+                    navigator.push(LoginScreen())
                 }
             }
         }

@@ -18,6 +18,7 @@ class MainViewModel(
             MainContract.Event.ClickOnHomeEvent -> clickOnHome()
             MainContract.Event.ClickOnLogoutEvent -> clickOnLogout()
             MainContract.Event.ClickOnScanEvent -> clickOnScan()
+            MainContract.Event.ClickOnDialogButtonEvent -> clickOnDialogButton()
         }
     }
 
@@ -120,6 +121,14 @@ class MainViewModel(
                 } else {
                     MainContract.Effect.ShowLoginDialog
                 }
+            }
+        }
+    }
+
+    private fun clickOnDialogButton() {
+        viewModelScope.launch {
+            setEffect {
+                MainContract.Effect.NavigateToLoginScreen
             }
         }
     }
