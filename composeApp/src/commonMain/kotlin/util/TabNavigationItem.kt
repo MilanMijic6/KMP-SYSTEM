@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import ui.ColorYellow
 import ui.FontRegular
@@ -21,19 +20,20 @@ import ui.TextGray
 
 @Composable
 fun RowScope.TabNavigationItem(
-    tab: Tab
+    tab: Tab,
+    onSelected: Boolean,
+    onClick: () -> Unit
 ) {
-    val tabNavigator = LocalTabNavigator.current
     BottomNavigationItem(
-        selected = tabNavigator.current.key == tab.key,
-        onClick = { tabNavigator.current = tab },
+        selected = onSelected,
+        onClick = { onClick() },
         label = {
             tab.options.title.let {
                 Text(
                     text = it,
                     fontFamily = FontRegular(),
                     fontSize = 12.sp,
-                    color = if (tabNavigator.current.key == tab.key) ColorYellow else Color.White
+                    color = if (onSelected) ColorYellow else Color.White
                 )
             }
         },
@@ -45,7 +45,7 @@ fun RowScope.TabNavigationItem(
                     modifier = Modifier
                         .size(38.dp),
                     colorFilter = ColorFilter.tint(
-                        if (tabNavigator.current.key == tab.key) ColorYellow
+                        if (onSelected) ColorYellow
                         else TextGray
                     ),
                 )

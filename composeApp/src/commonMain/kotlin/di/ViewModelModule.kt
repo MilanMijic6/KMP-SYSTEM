@@ -2,6 +2,7 @@ package di
 
 import auth.login.LoginViewModel
 import auth.register.RegisterViewModel
+import main.MainViewModel
 import main.home.UpcomingEventsViewModel
 import org.koin.dsl.module
 import splash.SplashViewModel
@@ -29,6 +30,11 @@ val viewModelModule = module {
     factory {
         UpcomingEventsViewModel(
             getUpcomingEventsUseCase = get()
+        )
+    }
+    factory {
+        MainViewModel(
+            isLoggedInUserUseCase = get()
         )
     }
 }
