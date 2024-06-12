@@ -81,6 +81,7 @@ class HomeScreen : Screen {
                     titleColor = Color.White,
                     textInBoxFirstLabel = "10",
                     textInBoxSecondLabel = "JUNE",
+                    itemWidth = 149,
                     backgroundColor = ColorRed
                 )
 
@@ -91,6 +92,7 @@ class HomeScreen : Screen {
                     titleColor = Color.White,
                     textInBoxFirstLabel = "18",
                     textInBoxSecondLabel = "JUNE",
+                    itemWidth = 255,
                     backgroundColor = ColorGreen
                 )
 
@@ -101,6 +103,7 @@ class HomeScreen : Screen {
                     titleColor = Color.Black,
                     textInBoxFirstLabel = "10",
                     textInBoxSecondLabel = "JULY",
+                    itemWidth = 149,
                     backgroundColor = ColorWhite
                 )
             }

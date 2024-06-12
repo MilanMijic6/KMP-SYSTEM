@@ -33,12 +33,13 @@ fun EventListItem(
     backgroundColor: Color = Color.White,
     textInBoxFirstLabel: String,
     textInBoxSecondLabel: String,
+    itemWidth: Int,
     contentModifier: Modifier = Modifier
 ) {
     Column(
         modifier = contentModifier
             .padding(8.dp)
-            .width(237.dp)
+            .width(itemWidth.dp)
             .background(backgroundColor, RoundedCornerShape(18.dp))
     ) {
         Box(
