@@ -1,8 +1,11 @@
 package util
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -11,13 +14,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import convertImageToBitmap
 import eventhubapplication.composeapp.generated.resources.Res
-import eventhubapplication.composeapp.generated.resources.dummy_profile_image
+import eventhubapplication.composeapp.generated.resources.ic_placeholder_profile_image
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun RoundedImage(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    icon: String?,
+    onClick: () -> Unit = { }
 ) {
     Box(
         modifier = modifier
@@ -28,13 +34,34 @@ fun RoundedImage(
                 color = Color.White,
                 shape = CircleShape
             )
+            .clickable {
+                onClick()
+            }
     ) {
-        Image(
-            painter = painterResource(Res.drawable.dummy_profile_image),
-            contentDescription = "Rounded Image with Border",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(158.dp)
+        val bitmap = convertImageToBitmap(
+            icon = icon,
+            sizeHeight = 158,
+            sizeWidth = 158
         )
+        if (bitmap != null) {
+            Image(
+                bitmap = bitmap,
+                contentDescription = "Rounded Image with Border",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(158.dp)
+                    .background(Color.White)
+            )
+        } else {
+            Image(
+                painter = painterResource(Res.drawable.ic_placeholder_profile_image),
+                contentDescription = "Placeholder image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(158.dp)
+                    .background(Color.White)
+                    .padding(30.dp)
+            )
+        }
     }
 }

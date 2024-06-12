@@ -4,6 +4,7 @@ import auth.login.LoginViewModel
 import auth.register.RegisterViewModel
 import main.MainViewModel
 import main.home.UpcomingEventsViewModel
+import main.profile.ProfileViewModel
 import org.koin.dsl.module
 import splash.SplashViewModel
 
@@ -34,7 +35,14 @@ val viewModelModule = module {
     }
     factory {
         MainViewModel(
-            isLoggedInUserUseCase = get()
+            isLoggedInUserUseCase = get(),
+            logoutUserUseCase = get()
+        )
+    }
+    factory {
+        ProfileViewModel(
+            getUserUseCase = get(),
+            updateUserUseCase = get()
         )
     }
 }

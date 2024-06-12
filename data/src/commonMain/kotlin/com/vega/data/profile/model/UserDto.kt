@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class UserDto(
     val email: String,
     val name: String,
-    val profilePicture: String
+    val profilePicture: String?
 )
 
 fun UserDto.toUser(): User {

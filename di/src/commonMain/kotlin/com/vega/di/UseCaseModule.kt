@@ -8,7 +8,6 @@ import com.vega.data.events.repository.UpcomingEventsRepositoryImpl
 import com.vega.data.my_events.repository.MyEventsRepositoryImpl
 import com.vega.data.profile.repository.ProfileRepositoryImpl
 import com.vega.data.update_event.repository.UpdateEventRepositoryImpl
-import com.vega.domain.repository.profile.ProfileRepository
 import com.vega.domain.usecase.create_event.CreateEventUseCase
 import com.vega.domain.usecase.event_details.DeleteEventUseCase
 import com.vega.domain.usecase.event_details.GetEventDetailsUseCase
@@ -79,7 +78,7 @@ val useCaseModule = module {
     }
     single {
         UpdateUserUseCase(
-            get<ProfileRepository>()
+            get<ProfileRepositoryImpl>()
         )
     }
     single {

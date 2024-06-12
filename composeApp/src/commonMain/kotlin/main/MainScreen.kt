@@ -144,7 +144,7 @@ private fun populateBottomTabs(
                 }
 
                 MainContract.Effect.LogoutUser -> {
-
+                    navigator.push(LoginScreen())
                 }
 
                 MainContract.Effect.NavigateToScanScreen -> {

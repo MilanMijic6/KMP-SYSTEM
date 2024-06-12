@@ -5,8 +5,8 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
-actual fun convertImageToBitmap(icon: String?, sizeWidth: Int, sizeHeight: Int): ImageBitmap {
-    if (icon == null) return ImageBitmap(width = sizeWidth, height = sizeHeight)
+actual fun convertImageToBitmap(icon: String?, sizeWidth: Int, sizeHeight: Int): ImageBitmap? {
+    if (icon == null) return null
     val encodedImageData = Base64.Default.decode(icon)
     return Image.makeFromEncoded(encodedImageData).toComposeImageBitmap()
 }

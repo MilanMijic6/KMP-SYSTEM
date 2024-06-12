@@ -1,5 +1,6 @@
 package main.profile
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,10 +21,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import com.vega.domain.model.profile.User
+import main.MainContract
+import org.koin.compose.koinInject
 import ui.ColorLightGray
 import ui.ColorPurple
+import util.CenteredDialog
 import util.HeaderText
 import util.LinkText
+import util.Loader
+import util.PurpleButton
 import util.RoundedImage
 import util.RoundedTextInput
 
@@ -28,15 +38,67 @@ class ProfileScreen : Screen {
 
     @Composable
     override fun Content() {
-        ShowMainContent()
+        val viewModel: ProfileViewModel = koinInject()
+        val handleEvent: (ProfileUserContract.Event) -> Unit = { viewModel.handleEvents(it) }
+        var errorTitle: String? = ""
+        val shouldShowDialog = remember { mutableStateOf(false) }
+        if (shouldShowDialog.value) {
+            CenteredDialog(
+                title = errorTitle ?: "Something went wrong",
+                buttonText = "Dismiss",
+                descriptionText = "Dismiss",
+                onNegativeClick = {
+                    shouldShowDialog.value = false
+                },
+                onPositiveClick = {
+                    shouldShowDialog.value = false
+                }
+            )
+        }
+        when (val state = viewModel.viewState.value) {
+            is ProfileUserContract.State.Error -> {
+                errorTitle = state.profilerUserModel.errorMsg
+                shouldShowDialog.value = true
+            }
+
+            is ProfileUserContract.State.Init -> {
+                UserInfoContent(
+                    scrollState = rememberScrollState(),
+                    user = state.profilerUserModel.user,
+                    state = state,
+                    handleEvent = handleEvent
+                )
+            }
+
+            is ProfileUserContract.State.Loading -> {
+                Loader()
+            }
+
+            is ProfileUserContract.State.UpdateSuccess -> {
+                UserInfoContent(
+                    scrollState = rememberScrollState(),
+                    user = state.profilerUserModel.user,
+                    state = state,
+                    handleEvent = handleEvent
+                )
+            }
+        }
+        LaunchedEffect(Unit) {
+            viewModel.handleEvents(ProfileUserContract.Event.ShowUserInfo)
+        }
     }
 
     @Composable
-    private fun ShowMainContent() {
+    private fun UserInfoContent(
+        scrollState: ScrollState,
+        user: User,
+        state: ProfileUserContract.State,
+        handleEvent: (ProfileUserContract.Event) -> Unit
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .background(
                     color = ColorLightGray
                 )
@@ -63,8 +125,11 @@ class ProfileScreen : Screen {
                             )
                     )
                     RoundedImage(
-                        modifier = Modifier
-                    )
+                        modifier = Modifier,
+                        user.profilePicture
+                    ) {
+                        //handle click on image to update it
+                    }
                 }
 
                 Column(
@@ -73,7 +138,7 @@ class ProfileScreen : Screen {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     HeaderText(
-                        text = "Milan Mijic",
+                        text = user.name,
                         color = Color.Black,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
@@ -94,9 +159,9 @@ class ProfileScreen : Screen {
                             )
                     )
                     RoundedTextInput(
-                        text = "Milan Mijic"
+                        text = user.name
                     ) {
-
+                        handleEvent(ProfileUserContract.Event.UpdateNameInput(it))
                     }
                     LinkText(
                         text = "30m ago",
@@ -111,13 +176,31 @@ class ProfileScreen : Screen {
                             )
                     )
                     RoundedTextInput(
-                        text = "milan.mijic@vegait.rs",
+                        text = user.email,
                         modifier = Modifier
                             .padding(
                                 bottom = 30.dp
                             )
                     ) {
+                        handleEvent(ProfileUserContract.Event.UpdateEmailInput(it))
+                    }
 
+                    PurpleButton(
+                        text = "Submit",
+                        enabled = state.profilerUserModel.isEnabledButton,
+                        modifier = Modifier
+                            .padding(
+                                vertical = 16.dp,
+                                horizontal = 16.dp
+                            )
+                    ) {
+                        handleEvent(
+                            ProfileUserContract.Event.SubmitButtonClick(
+                                name = state.profilerUserModel.updateName,
+                                email = state.profilerUserModel.updateEmail,
+                                profilePicture = state.profilerUserModel.updatedProfilePicture
+                            )
+                        )
                     }
                 }
             }

@@ -16,25 +16,30 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ui.ColorPurple
 import ui.FontBold
+import ui.TextGray
 
 @Composable
 fun PurpleButton(
     text: String,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit = { }
 ) {
     Button(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(),
+        enabled = enabled,
         contentPadding = PaddingValues(),
         shape = RoundedCornerShape(10.dp),
-        onClick = { onClick() },
+        onClick = {
+            if (enabled) onClick()
+        },
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = ColorPurple
+                    color = if (enabled) ColorPurple else TextGray
                 )
                 .then(modifier),
             contentAlignment = Alignment.Center,

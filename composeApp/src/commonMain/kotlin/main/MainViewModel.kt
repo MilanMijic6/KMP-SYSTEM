@@ -2,10 +2,12 @@ package main
 
 import BaseViewModel
 import com.vega.domain.usecase.login.IsLoggedInUserUseCase
+import com.vega.domain.usecase.profile.LogoutUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val isLoggedInUserUseCase: IsLoggedInUserUseCase
+    private val isLoggedInUserUseCase: IsLoggedInUserUseCase,
+    private val logoutUserUseCase: LogoutUseCase
 ) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
 
     override fun setInitialState(): MainContract.State = MainContract.State.LoggedIn()
@@ -16,7 +18,7 @@ class MainViewModel(
             MainContract.Event.ClickOnFilterEvent -> clickOnFilter()
             MainContract.Event.ClickOnMyEventsEvent -> clickOnMyEvents()
             MainContract.Event.ClickOnHomeEvent -> clickOnHome()
-            MainContract.Event.ClickOnLogoutEvent -> clickOnLogout()
+            MainContract.Event.ClickOnLogoutEvent -> logout()
             MainContract.Event.ClickOnScanEvent -> clickOnScan()
             MainContract.Event.ClickOnDialogButtonEvent -> clickOnDialogButton()
         }
@@ -101,12 +103,16 @@ class MainViewModel(
         }
     }
 
-    private fun clickOnLogout() {
+    private fun logout() {
         viewModelScope.launch {
-            setEffect {
-                if (viewState.value.mainScreenModel.isLoggedIn) {
+            runCatching {
+                logoutUserUseCase.execute()
+            }.onSuccess {
+                setEffect {
                     MainContract.Effect.LogoutUser
-                } else {
+                }
+            }.onFailure {
+                setEffect {
                     MainContract.Effect.ShowLoginDialog
                 }
             }
