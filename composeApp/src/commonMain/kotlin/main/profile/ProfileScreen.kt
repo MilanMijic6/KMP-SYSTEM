@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import com.vega.domain.model.profile.User
-import main.MainContract
 import org.koin.compose.koinInject
 import ui.ColorLightGray
 import ui.ColorPurple
@@ -75,6 +74,9 @@ class ProfileScreen : Screen {
             }
 
             is ProfileUserContract.State.UpdateSuccess -> {
+                LaunchedEffect(Unit) {
+                    viewModel.handleEvents(ProfileUserContract.Event.ShowUserInfo)
+                }
                 UserInfoContent(
                     scrollState = rememberScrollState(),
                     user = state.profilerUserModel.user,
@@ -129,6 +131,7 @@ class ProfileScreen : Screen {
                         user.profilePicture
                     ) {
                         //handle click on image to update it
+                        handleEvent(ProfileUserContract.Event.UpdateProfilePicture(""))
                     }
                 }
 
@@ -162,6 +165,8 @@ class ProfileScreen : Screen {
                         text = user.name
                     ) {
                         handleEvent(ProfileUserContract.Event.UpdateNameInput(it))
+                        //todo remove later
+                        handleEvent(ProfileUserContract.Event.UpdateProfilePicture(""))
                     }
                     LinkText(
                         text = "30m ago",
@@ -187,7 +192,9 @@ class ProfileScreen : Screen {
 
                     PurpleButton(
                         text = "Submit",
-                        enabled = state.profilerUserModel.isEnabledButton,
+                        enabled = state.profilerUserModel.isEditedName ||
+                                state.profilerUserModel.isEditedEmail ||
+                                state.profilerUserModel.isEditedPicture,
                         modifier = Modifier
                             .padding(
                                 vertical = 16.dp,

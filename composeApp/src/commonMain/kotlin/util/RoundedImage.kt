@@ -18,6 +18,7 @@ import convertImageToBitmap
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_placeholder_profile_image
 import org.jetbrains.compose.resources.painterResource
+import ui.ColorLightGray
 
 @Composable
 fun RoundedImage(
@@ -59,7 +60,7 @@ fun RoundedImage(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(158.dp)
-                    .background(Color.White)
+                    .background(ColorLightGray)
                     .padding(30.dp)
             )
         }

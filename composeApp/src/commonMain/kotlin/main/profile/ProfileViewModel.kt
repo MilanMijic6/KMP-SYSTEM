@@ -58,7 +58,7 @@ class ProfileViewModel(
                 ProfileUserContract.State.Init(
                     viewState.value.profilerUserModel.copy(
                         updateName = inputValue,
-                        isEnabledButton = inputValue.isNotEmpty()
+                        isEditedName = inputValue.isNotEmpty()
                     )
                 )
             }
@@ -71,7 +71,7 @@ class ProfileViewModel(
                 ProfileUserContract.State.Init(
                     viewState.value.profilerUserModel.copy(
                         updateEmail = inputValue,
-                        isEnabledButton = inputValue.isNotEmpty()
+                        isEditedEmail = inputValue.isNotEmpty()
                     )
                 )
             }
@@ -84,7 +84,7 @@ class ProfileViewModel(
                 ProfileUserContract.State.Init(
                     viewState.value.profilerUserModel.copy(
                         updatedProfilePicture = profilePicture,
-                        isEnabledButton = profilePicture.isNotEmpty()
+                        isEditedPicture = profilePicture.isNotEmpty()
                     )
                 )
             }

@@ -8,7 +8,9 @@ data class ProfileUserScreenModel(
     val updateName: String,
     val updateEmail: String,
     val updatedProfilePicture: String,
-    val isEnabledButton: Boolean
+    val isEditedName: Boolean,
+    val isEditedEmail: Boolean,
+    val isEditedPicture: Boolean
 )
 
 fun setInitState(): ProfileUserScreenModel = ProfileUserScreenModel(
@@ -21,5 +23,7 @@ fun setInitState(): ProfileUserScreenModel = ProfileUserScreenModel(
     updateName = "",
     updateEmail = "",
     updatedProfilePicture = "",
-    isEnabledButton = false
+    isEditedName = false,
+    isEditedEmail = false,
+    isEditedPicture = false
 )
