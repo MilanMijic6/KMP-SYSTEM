@@ -8,11 +8,7 @@ class ProfileUserContract {
     sealed class Event : ViewEvent {
         data object ShowUserInfo : Event()
         data object ShowUserinfoError : Event()
-        data class SubmitButtonClick(
-            val name: String,
-            val email: String,
-            val profilePicture: String
-        ) : Event()
+        data object SubmitButtonClick : Event()
         data class UpdateEmailInput(val inputValue: String) : Event()
         data class UpdateNameInput(val inputValue: String) : Event()
         data class UpdateProfilePicture(val profilePicture: String) : Event()

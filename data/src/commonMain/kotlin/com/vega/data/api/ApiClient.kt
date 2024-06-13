@@ -2,6 +2,7 @@ package com.vega.data.api
 
 import com.vega.domain.model.create_event.CreateEventRequestBody
 import com.vega.domain.model.login.LoginRequestBody
+import com.vega.domain.model.profile.UpdateUserRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
 import com.vega.domain.model.update_event.UpdateEventRequestBody
 import io.ktor.client.statement.HttpResponse
@@ -23,9 +24,7 @@ interface ApiClient {
     suspend fun updateUser(
         endpoint: String,
         token: String,
-        name: String,
-        email: String,
-        profilePicture: String
+        params: UpdateUserRequestBody
     ): HttpResponse
 
     suspend fun deleteEvent(endpoint: String, token: String): HttpResponse

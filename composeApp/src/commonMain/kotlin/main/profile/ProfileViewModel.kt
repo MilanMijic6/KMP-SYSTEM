@@ -1,6 +1,7 @@
 package main.profile
 
 import BaseViewModel
+import com.vega.domain.model.profile.UpdateUserRequestBody
 import com.vega.domain.usecase.profile.GetUserUseCase
 import com.vega.domain.usecase.profile.UpdateUserUseCase
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ class ProfileViewModel(
         when (event) {
             ProfileUserContract.Event.ShowUserInfo -> getCurrentUser()
             ProfileUserContract.Event.ShowUserinfoError -> showError()
-            is ProfileUserContract.Event.SubmitButtonClick -> event.updateUser()
+            ProfileUserContract.Event.SubmitButtonClick -> updateUser()
             is ProfileUserContract.Event.UpdateEmailInput -> event.updateEmailInput()
             is ProfileUserContract.Event.UpdateNameInput -> event.updateNameInput()
             is ProfileUserContract.Event.UpdateProfilePicture -> event.updateProfilePicture()
@@ -91,24 +92,32 @@ class ProfileViewModel(
         }
     }
 
-    private fun ProfileUserContract.Event.SubmitButtonClick.updateUser() {
+    private fun updateUser() {
         setState {
             ProfileUserContract.State.Loading(viewState.value.profilerUserModel)
         }
         viewModelScope.launch {
             runCatching {
-                updateUserUseCase.execute(
-                    name = name,
-                    email = email,
-                    profilePicture = profilePicture
-                )
+                with(viewState.value.profilerUserModel) {
+                    UpdateUserRequestBody(
+                        name = updateName.ifEmpty { viewState.value.profilerUserModel.user.name },
+                        email = updateEmail.ifEmpty { viewState.value.profilerUserModel.user.email },
+                        profilePicture = updatedProfilePicture
+                    )
+                }
+            }.mapCatching {
+                updateUserUseCase.execute(it)
             }.onSuccess {
                 setState {
                     ProfileUserContract.State.UpdateSuccess(viewState.value.profilerUserModel)
                 }
             }.onFailure {
                 setState {
-                    ProfileUserContract.State.Error(viewState.value.profilerUserModel.copy(errorMsg = it.message.toString()))
+                    ProfileUserContract.State.Error(
+                        viewState.value.profilerUserModel.copy(
+                            errorMsg = it.message.toString()
+                        )
+                    )
                 }
             }
         }

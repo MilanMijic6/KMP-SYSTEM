@@ -202,11 +202,7 @@ class ProfileScreen : Screen {
                             )
                     ) {
                         handleEvent(
-                            ProfileUserContract.Event.SubmitButtonClick(
-                                name = state.profilerUserModel.updateName,
-                                email = state.profilerUserModel.updateEmail,
-                                profilePicture = state.profilerUserModel.updatedProfilePicture
-                            )
+                            ProfileUserContract.Event.SubmitButtonClick
                         )
                     }
                 }

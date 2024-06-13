@@ -2,13 +2,11 @@ package com.vega.data.api
 
 import com.vega.data.BASE_URL
 import com.vega.data.Constants
-import com.vega.data.Constants.EMAIL
-import com.vega.data.Constants.NAME
 import com.vega.data.Constants.PAGE_NUMBER
 import com.vega.data.Constants.PAGE_SIZE
-import com.vega.data.Constants.PROFILE_PICTURE
 import com.vega.domain.model.create_event.CreateEventRequestBody
 import com.vega.domain.model.login.LoginRequestBody
+import com.vega.domain.model.profile.UpdateUserRequestBody
 import com.vega.domain.model.register.RegisterRequestBody
 import com.vega.domain.model.update_event.UpdateEventRequestBody
 import io.ktor.client.HttpClient
@@ -81,19 +79,14 @@ class ApiClientImpl(
     override suspend fun updateUser(
         endpoint: String,
         token: String,
-        name: String,
-        email: String,
-        profilePicture: String
+        params: UpdateUserRequestBody
     ) = httpClient.put {
         url(BASE_URL + endpoint)
+        contentType(ContentType.Application.Json)
         headers {
             append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
         }
-        url {
-            parameters.append(NAME, name)
-            parameters.append(EMAIL, email)
-            parameters.append(PROFILE_PICTURE, profilePicture)
-        }
+        setBody(params)
     }
 
     override suspend fun deleteEvent(endpoint: String, token: String) =
@@ -111,6 +104,7 @@ class ApiClientImpl(
         params: UpdateEventRequestBody
     ) = httpClient.put {
         url(BASE_URL + endpoint)
+        contentType(ContentType.Application.Json)
         headers {
             append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
         }
@@ -139,6 +133,7 @@ class ApiClientImpl(
         params: CreateEventRequestBody
     ) = httpClient.post {
         url(BASE_URL + endpoint)
+        contentType(ContentType.Application.Json)
         headers {
             append(HttpHeaders.Authorization, "${Constants.BEARER} $token")
         }

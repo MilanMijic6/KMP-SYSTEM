@@ -1,6 +1,7 @@
 package com.vega.data.profile.remote
 
 import com.vega.data.api.ApiClientImpl
+import com.vega.domain.model.profile.UpdateUserRequestBody
 import io.ktor.client.statement.HttpResponse
 
 class ProfileApiImpl(
@@ -14,14 +15,10 @@ class ProfileApiImpl(
 
     override suspend fun updateUser(
         token: String,
-        name: String,
-        email: String,
-        profilePicture: String
+        user: UpdateUserRequestBody
     ): HttpResponse = apiClient.updateUser(
         endpoint = "api/Users/updateUser",
         token = token,
-        name = name,
-        email = email,
-        profilePicture = profilePicture
+        params = user
     )
 }
