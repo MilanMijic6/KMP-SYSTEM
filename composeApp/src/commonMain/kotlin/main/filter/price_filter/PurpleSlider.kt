@@ -31,6 +31,7 @@ import ui.TextGray
 fun PurpleSlider(
     minValue: Float,
     maxValue: Float,
+    slideStep: Int,
     onTextChanged: (Float) -> Unit
 ) {
     var value by remember { mutableStateOf(0f) }
@@ -44,8 +45,11 @@ fun PurpleSlider(
         Slider(
             value = value,
             onValueChange = { newValue ->
-                value = newValue
-                onTextChanged(newValue)
+                val steppedValue = (newValue / slideStep).toInt() * slideStep.toFloat()
+                if (steppedValue != value) {
+                    value = steppedValue
+                    onTextChanged(steppedValue)
+                }
             },
             valueRange = minValue..maxValue,
             colors = SliderDefaults.colors(

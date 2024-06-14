@@ -109,13 +109,20 @@ class ProfileViewModel(
                 updateUserUseCase.execute(it)
             }.onSuccess {
                 setState {
-                    ProfileUserContract.State.UpdateSuccess(viewState.value.profilerUserModel)
+                    ProfileUserContract.State.UpdateSuccess(viewState.value.profilerUserModel.copy(
+                        isEditedName = false,
+                        isEditedEmail = false,
+                        isEditedPicture = false
+                    ))
                 }
             }.onFailure {
                 setState {
                     ProfileUserContract.State.Error(
                         viewState.value.profilerUserModel.copy(
-                            errorMsg = it.message.toString()
+                            errorMsg = it.message.toString(),
+                            isEditedPicture = false,
+                            isEditedEmail = false,
+                            isEditedName = false
                         )
                     )
                 }

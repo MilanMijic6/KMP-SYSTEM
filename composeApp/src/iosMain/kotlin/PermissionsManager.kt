@@ -38,7 +38,6 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
                     remember { PHPhotoLibrary.authorizationStatus() }
                 askGalleryPermission(status, permission, callback)
             }
-
         }
     }
 
@@ -115,5 +114,4 @@ actual class PermissionsManager actual constructor(private val callback: Permiss
             UIApplication.sharedApplication.openURL(it)
         }
     }
-
 }

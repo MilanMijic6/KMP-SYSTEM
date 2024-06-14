@@ -1,11 +1,18 @@
 package main.filter
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -37,17 +44,25 @@ class FilterScreen: Screen {
                     vertical = 20.dp
                 )
         ) {
-            Text(
-                text = "Filter",
-                fontFamily = FontRegular(),
-                fontSize = 26.sp,
-                color = Color.Black,
+            Row(
                 modifier = Modifier
-                    .padding(
-                        bottom = 10.dp,
-                        start = 16.dp
-                    )
-            )
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Filter",
+                    fontFamily = FontRegular(),
+                    fontSize = 26.sp,
+                    color = Color.Black
+                )
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close Icon",
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+            }
 
             FilterList()
 
@@ -116,8 +131,9 @@ class FilterScreen: Screen {
             PurpleSlider(
                 minValue = 0f,
                 maxValue = 120f,
+                slideStep = 10,
                 onTextChanged = {
-                    val value = it
+
                 }
             )
 
