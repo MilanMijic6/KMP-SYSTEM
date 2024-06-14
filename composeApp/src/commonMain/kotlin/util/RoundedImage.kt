@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import convertImageToBitmap
+import convertBase64ToBitmap
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_placeholder_profile_image
 import org.jetbrains.compose.resources.painterResource
@@ -41,7 +41,7 @@ fun RoundedImage(
                 onClick()
             }
     ) {
-        val userBitmap = convertImageToBitmap(
+        val userBitmap = convertBase64ToBitmap(
             icon = icon,
             sizeHeight = 158,
             sizeWidth = 158
