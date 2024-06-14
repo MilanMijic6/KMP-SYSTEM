@@ -66,6 +66,7 @@ kotlin {
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.koin.android)
                 implementation("com.google.zxing:core:3.4.1")
+                implementation(libs.accompanist.permissions)
             }
         }
 

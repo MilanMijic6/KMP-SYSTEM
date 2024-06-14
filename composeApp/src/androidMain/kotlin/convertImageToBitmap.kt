@@ -1,16 +1,22 @@
 import android.graphics.BitmapFactory
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import kotlinx.coroutines.CoroutineStart
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
 actual fun convertImageToBitmap(icon: String?, sizeWidth: Int, sizeHeight: Int): ImageBitmap? {
-    if (icon.isNullOrEmpty()) {
-        return null
+    return if (icon.isNullOrEmpty()) {
+        null
     } else {
-        val encodedImageData = Base64.Default.decode(icon)
-        return BitmapFactory.decodeByteArray(encodedImageData, 0, encodedImageData.size)
-            .asImageBitmap()
+        try {
+            val temp = icon.replace("\n", "")
+            val imageBytes = Base64.decode(temp)
+            val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            bitmap.asImageBitmap()
+        } catch (e: Exception) {
+            null
+        }
     }
 }

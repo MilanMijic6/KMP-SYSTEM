@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import convertImageToBitmap
@@ -23,6 +24,7 @@ import ui.ColorLightGray
 @Composable
 fun RoundedImage(
     modifier: Modifier = Modifier,
+    bitmap: ImageBitmap?,
     icon: String?,
     onClick: () -> Unit = { }
 ) {
@@ -39,12 +41,21 @@ fun RoundedImage(
                 onClick()
             }
     ) {
-        val bitmap = convertImageToBitmap(
+        val userBitmap = convertImageToBitmap(
             icon = icon,
             sizeHeight = 158,
             sizeWidth = 158
         )
-        if (bitmap != null) {
+        if (userBitmap != null) {
+            Image(
+                bitmap = userBitmap,
+                contentDescription = "Rounded Image with Border",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(158.dp)
+                    .background(Color.White)
+            )
+        } else if (bitmap != null) {
             Image(
                 bitmap = bitmap,
                 contentDescription = "Rounded Image with Border",
