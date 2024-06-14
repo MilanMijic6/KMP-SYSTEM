@@ -55,12 +55,11 @@ class ProfileScreen : Screen {
     override fun Content() {
         val viewModel: ProfileViewModel = koinInject()
         val handleEvent: (ProfileUserContract.Event) -> Unit = { viewModel.handleEvents(it) }
-        var errorTitle: String? = ""
         val shouldShowDialog = remember { mutableStateOf(false) }
 
         if (shouldShowDialog.value) {
             CenteredDialog(
-                title = errorTitle ?: "Something went wrong",
+                title = "Something went wrong",
                 buttonText = "Dismiss",
                 descriptionText = "Dismiss",
                 onNegativeClick = {
@@ -74,20 +73,10 @@ class ProfileScreen : Screen {
 
         when (val state = viewModel.viewState.value) {
             is ProfileUserContract.State.Error -> {
-                errorTitle = state.profilerUserModel.errorMsg
                 shouldShowDialog.value = true
             }
 
             is ProfileUserContract.State.Init -> {
-                UserInfoContent(
-                    scrollState = rememberScrollState(),
-                    user = state.profilerUserModel.user,
-                    state = state,
-                    handleEvent = handleEvent
-                )
-            }
-
-            is ProfileUserContract.State.Loading -> {
                 Loader()
             }
 

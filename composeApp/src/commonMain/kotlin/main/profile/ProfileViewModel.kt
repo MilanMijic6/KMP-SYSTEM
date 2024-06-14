@@ -35,7 +35,7 @@ class ProfileViewModel(
                 getUserUseCase.execute()
             }.onSuccess {
                 setState {
-                    ProfileUserContract.State.Init(
+                    ProfileUserContract.State.UpdateSuccess(
                         viewState.value.profilerUserModel.copy(
                             user = it
                         )
@@ -56,7 +56,7 @@ class ProfileViewModel(
     private fun ProfileUserContract.Event.UpdateNameInput.updateNameInput() {
         viewModelScope.launch {
             setState {
-                ProfileUserContract.State.Init(
+                ProfileUserContract.State.UpdateSuccess(
                     viewState.value.profilerUserModel.copy(
                         updateName = inputValue,
                         isEditedName = inputValue.isNotEmpty()
@@ -69,7 +69,7 @@ class ProfileViewModel(
     private fun ProfileUserContract.Event.UpdateEmailInput.updateEmailInput() {
         viewModelScope.launch {
             setState {
-                ProfileUserContract.State.Init(
+                ProfileUserContract.State.UpdateSuccess(
                     viewState.value.profilerUserModel.copy(
                         updateEmail = inputValue,
                         isEditedEmail = inputValue.isNotEmpty()
@@ -82,7 +82,7 @@ class ProfileViewModel(
     private fun ProfileUserContract.Event.UpdateProfilePicture.updateProfilePicture() {
         viewModelScope.launch {
             setState {
-                ProfileUserContract.State.Init(
+                ProfileUserContract.State.UpdateSuccess(
                     viewState.value.profilerUserModel.copy(
                         updatedProfilePicture = profilePicture,
                         isEditedPicture = profilePicture.isNotEmpty()
@@ -94,7 +94,7 @@ class ProfileViewModel(
 
     private fun updateUser() {
         setState {
-            ProfileUserContract.State.Loading(viewState.value.profilerUserModel)
+            ProfileUserContract.State.Init(viewState.value.profilerUserModel)
         }
         viewModelScope.launch {
             runCatching {
@@ -102,7 +102,7 @@ class ProfileViewModel(
                     UpdateUserRequestBody(
                         name = updateName.ifEmpty { viewState.value.profilerUserModel.user.name },
                         email = updateEmail.ifEmpty { viewState.value.profilerUserModel.user.email },
-                        profilePicture = updatedProfilePicture
+                        profilePicture = updatedProfilePicture.ifEmpty { viewState.value.profilerUserModel.user.profilePicture!! }
                     )
                 }
             }.mapCatching {

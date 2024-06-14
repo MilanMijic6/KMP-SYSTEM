@@ -22,10 +22,6 @@ class ProfileUserContract {
             override val profilerUserModel: ProfileUserScreenModel = setInitState()
         ) : State()
 
-        data class Loading(
-            override val profilerUserModel: ProfileUserScreenModel
-        ) : State()
-
         data class Error(
             override val profilerUserModel: ProfileUserScreenModel
         ) : State()
