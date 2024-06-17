@@ -18,7 +18,7 @@ class HomeTab(
 ) : Tab {
     @Composable
     override fun Content() {
-        Navigator(HomeScreen()) {
+        Navigator(HomeScreen(navigator)) {
             FadeTransition(it)
         }
     }

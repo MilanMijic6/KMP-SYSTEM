@@ -8,18 +8,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.vega.domain.model.events.UpcomingEvent
 import main.eventdetails.EventDetailsScreen
 import org.koin.compose.koinInject
 import util.Loader
 
-class HomeScreen : Screen {
+class HomeScreen(
+    val navigator: Navigator
+) : Screen {
 
     @Composable
     override fun Content() {
         val viewModel: UpcomingEventsViewModel = koinInject()
-        val navigator = LocalNavigator.currentOrThrow
         when (val state = viewModel.viewState.value) {
             is UpcomingEventsContract.State.Error -> {
                 //todo handle error
