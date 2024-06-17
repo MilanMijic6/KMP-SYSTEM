@@ -31,7 +31,8 @@ val viewModelModule = module {
     }
     factory {
         UpcomingEventsViewModel(
-            getUpcomingEventsUseCase = get()
+            getUpcomingEventsUseCase = get(),
+            isLoggedInUserUseCase = get()
         )
     }
     factory {

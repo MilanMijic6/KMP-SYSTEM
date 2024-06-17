@@ -3,12 +3,14 @@ package main.home
 import ViewEvent
 import ViewSideEffect
 import ViewState
+import main.MainContract
 
 class UpcomingEventsContract {
     sealed class Event : ViewEvent {
         data class ShowUpcomingEvents(val page: Int, val pageSize: Int) : Event()
         data object ShowUpcomingEventsErrorMsg : Event()
         data class SelectUpcomingEventItem(val eventId: String) : Event()
+        data object ClickOnDialogButtonEvent: Event()
 
     }
 
@@ -30,6 +32,10 @@ class UpcomingEventsContract {
 
     sealed class Effect : ViewSideEffect {
         data class NavigateToEventDetailsScreen(val eventId: String) : Effect()
+
+        data object ShowLoginDialog : Effect()
+
+        data object NavigateToLoginScreen: Effect()
 
     }
 }
