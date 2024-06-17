@@ -41,11 +41,7 @@ fun RoundedImage(
                 onClick()
             }
     ) {
-        val userBitmap = convertBase64ToBitmap(
-            icon = icon,
-            sizeHeight = 158,
-            sizeWidth = 158
-        )
+        val userBitmap = convertBase64ToBitmap(icon = icon)
         if (userBitmap != null) {
             Image(
                 bitmap = userBitmap,

@@ -5,7 +5,7 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 @OptIn(ExperimentalEncodingApi::class)
-actual fun convertBase64ToBitmap(icon: String?, sizeWidth: Int, sizeHeight: Int): ImageBitmap? {
+actual fun convertBase64ToBitmap(icon: String?): ImageBitmap? {
     return if (icon.isNullOrEmpty()) {
         null
     } else {

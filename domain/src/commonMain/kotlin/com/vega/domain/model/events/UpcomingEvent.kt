@@ -7,6 +7,8 @@ data class UpcomingEvent(
     val id: Int,
     val name: String,
     val startAt: String,
+    val dateDay: String,
+    val dateMonth: String,
     val address: String,
     val price: Double,
     val type: String,

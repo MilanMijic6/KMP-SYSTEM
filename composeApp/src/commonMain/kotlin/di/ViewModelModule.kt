@@ -3,6 +3,7 @@ package di
 import auth.login.LoginViewModel
 import auth.register.RegisterViewModel
 import main.MainViewModel
+import main.eventdetails.EventDetailsViewModel
 import main.home.UpcomingEventsViewModel
 import main.profile.ProfileViewModel
 import org.koin.dsl.module
@@ -43,6 +44,12 @@ val viewModelModule = module {
         ProfileViewModel(
             getUserUseCase = get(),
             updateUserUseCase = get()
+        )
+    }
+    factory {
+        EventDetailsViewModel(
+            getEventDetailsUseCase = get(),
+            reserveEventDetailsUseCase = get()
         )
     }
 }

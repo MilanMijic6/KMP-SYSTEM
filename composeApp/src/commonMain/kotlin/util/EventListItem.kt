@@ -11,13 +11,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_event_location
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import ui.ColorLightOrange
 import ui.ColorOrange
@@ -26,7 +26,7 @@ import ui.TextGray
 
 @Composable
 fun EventListItem(
-    imageResource: DrawableResource,
+    bitmap: ImageBitmap?,
     labelText: String,
     iconLabelText: String,
     titleColor: Color = Color.Black,
@@ -39,7 +39,7 @@ fun EventListItem(
     Column(
         modifier = contentModifier
             .padding(8.dp)
-            .width(itemWidth.dp)
+            .fillMaxWidth()
             .background(backgroundColor, RoundedCornerShape(18.dp))
     ) {
         Box(
@@ -47,15 +47,17 @@ fun EventListItem(
                 .fillMaxWidth()
                 .padding(8.dp)
         ) {
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(130.dp)
-                    .clip(RoundedCornerShape(12.dp)),
-                contentScale = ContentScale.Crop
-            )
+            if (bitmap != null) {
+                Image(
+                    bitmap = bitmap,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(150.dp)
+                        .clip(RoundedCornerShape(12.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
             Box(
                 modifier = Modifier
                     .padding(8.dp)

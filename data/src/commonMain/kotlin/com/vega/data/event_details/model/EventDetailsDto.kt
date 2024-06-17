@@ -5,25 +5,31 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class EventDetailsDto(
-    val id: String,
-    val description: String,
+    val id: Int,
+    val name: String,
+    val description: String?,
     val startAt: String,
     val address: String,
     val price: Double,
     val type: String,
-    val place: String,
-    val status: String
+    val place: String?,
+    val status: String?,
+    val image: String,
 )
 
 fun EventDetailsDto.toEvent(): EventDetails {
     return EventDetails(
-        id = id,
-        description = description,
+        id = id.toString(),
+        description = if (description.isNullOrEmpty()) "" else description,
         startAt = startAt,
         address = address,
         price = price,
         type = type,
-        place = place,
-        status = status
+        place = if (place.isNullOrEmpty()) "" else place,
+        status = if (status.isNullOrEmpty()) "" else status,
+        image = image,
+        name = name,
+        startDate = "",
+        startTime = ""
     )
 }

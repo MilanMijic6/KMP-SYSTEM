@@ -1,6 +1,7 @@
 package main.eventdetails
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,45 +16,42 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.vega.domain.model.events.UpcomingEvent
+import com.vega.domain.model.event_details.EventDetails
+import convertBase64ToBitmap
 import eventhubapplication.composeapp.generated.resources.Res
-import eventhubapplication.composeapp.generated.resources.event_image
 import eventhubapplication.composeapp.generated.resources.ic_event_location
 import eventhubapplication.composeapp.generated.resources.ic_tab_calendar
-import eventhubapplication.composeapp.generated.resources.log_in
-import main.home.UpcomingEventsViewModel
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.resources.stringResource
 import ui.FontBold
 import ui.FontRegular
 import util.PurpleButton
 
 @Composable
 fun SuccessEventDetails(
-    viewModel: UpcomingEventsViewModel,
-    upcomingEvents: List<UpcomingEvent>
+    event: EventDetails,
+    handleEvent: (EventDetailsContract.Event) -> Unit
 ) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.Red)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(Color.Red)
         ) {
+            convertBase64ToBitmap(event.image)?.let {
+                Image(
+                    bitmap = it,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(230.dp)
+                )
+            }
 
-            Image(
-                //todo use real image later on
-                painter = painterResource(Res.drawable.event_image),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(230.dp)
-            )
-
-            //todo use real title later on
             Text(
-                text = "Internation Band Music Concert",
+                text = event.name,
                 modifier = Modifier
                     .padding(
                         vertical = 8.dp,
@@ -77,14 +75,13 @@ fun SuccessEventDetails(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            //todo user real data
             DetailRowItem(
                 modifier = Modifier.padding(
                     horizontal = 16.dp
                 ),
                 iconResId = Res.drawable.ic_event_location,
-                topText = "Gala Convention Center",
-                bottomText = "36 Guild Street London, UK"
+                topText = event.place,
+                bottomText = event.address
             )
 
             Text(
@@ -102,7 +99,7 @@ fun SuccessEventDetails(
             )
 
             Text(
-                text = "Enjoy in  great event and show! Have a nice day!",
+                text = event.description,
                 modifier = Modifier
                     .padding(
                         bottom = 8.dp,
@@ -117,21 +114,23 @@ fun SuccessEventDetails(
             )
 
             PurpleButton(
-                text = stringResource(Res.string.log_in),
+                text = "Reserve",
                 modifier = Modifier
                     .padding(
                         16.dp
                     )
             ) {
-                /*handleEvent(
-                LoginContract.Event.LoginUserEvent
-            )*/
+                handleEvent(
+                    EventDetailsContract.Event.ClickOnReserveButton
+                )
             }
         }
         Header(
             title = "Event details"
         ) {
-            //todo implement back
+            handleEvent(
+                EventDetailsContract.Event.ClickBackButton
+            )
         }
     }
 }
