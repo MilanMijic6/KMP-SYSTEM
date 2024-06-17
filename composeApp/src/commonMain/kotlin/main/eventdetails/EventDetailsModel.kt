@@ -18,7 +18,9 @@ fun setInitState(): EventDetailsModel = EventDetailsModel(
         description = "",
         image = "",
         status = "",
-        place = ""
+        place = "",
+        startDate = "",
+        startTime = ""
     ),
     errorMsg = ""
 )

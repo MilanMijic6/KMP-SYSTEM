@@ -26,6 +26,7 @@ multiplatform-settings = "1.1.1"
 voyager = "1.0.0"
 voyagerKoin = "1.0.0"
 accompanist-permissions = "0.32.0"
+coreI18n = "1.0.0-alpha01"
 
 [libraries]
 atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }
@@ -67,6 +68,7 @@ voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", 
 ktor-server-status-pages = {module = "io.ktor:ktor-server-status-pages", version.ref = "ktor"}
 ktor-client-logging = {module = "io.ktor:ktor-client-logging", version.ref = "ktor"}
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist-permissions" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
