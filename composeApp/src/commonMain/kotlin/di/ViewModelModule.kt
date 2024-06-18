@@ -5,6 +5,7 @@ import auth.register.RegisterViewModel
 import main.MainViewModel
 import main.eventdetails.EventDetailsViewModel
 import main.home.UpcomingEventsViewModel
+import main.myevents.MyEventsViewModel
 import main.profile.ProfileViewModel
 import org.koin.dsl.module
 import splash.SplashViewModel
@@ -51,6 +52,11 @@ val viewModelModule = module {
         EventDetailsViewModel(
             getEventDetailsUseCase = get(),
             reserveEventDetailsUseCase = get()
+        )
+    }
+    factory {
+        MyEventsViewModel(
+            getMyEventsUseCase = get()
         )
     }
 }
