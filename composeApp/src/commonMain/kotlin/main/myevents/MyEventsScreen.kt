@@ -48,6 +48,7 @@ class MyEventsScreen(
             viewModel.handleEvents(MyEventsContract.Event.ShowMyEvents(0, 10))
             viewModel.effect.collect { effect ->
                 when (effect) {
+                    //todo, show bottom sheet
                     is MyEventsContract.Effect.NavigateToMyEventDetailsScreen -> {
                         navigator.push(
                             EventDetailsScreen(id = effect.eventId)

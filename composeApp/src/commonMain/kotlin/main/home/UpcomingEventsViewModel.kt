@@ -25,7 +25,9 @@ class UpcomingEventsViewModel(
         when (event) {
             is UpcomingEventsContract.Event.SelectUpcomingEventItem -> event.passEventId()
             is UpcomingEventsContract.Event.ShowUpcomingEvents -> event.getUpcomingEvents()
-            is UpcomingEventsContract.Event.ShowUpcomingEventsErrorMsg -> TODO()
+            is UpcomingEventsContract.Event.ShowUpcomingEventsErrorMsg -> {
+                //todo handle later
+            }
             UpcomingEventsContract.Event.ClickOnDialogButtonEvent -> clickOnDialogButton()
         }
     }

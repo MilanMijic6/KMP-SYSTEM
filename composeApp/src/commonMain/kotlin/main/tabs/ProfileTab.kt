@@ -9,7 +9,6 @@ import cafe.adriel.voyager.transitions.FadeTransition
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_tab_profile
 import eventhubapplication.composeapp.generated.resources.tab_profile
-import main.eventdetails.EventDetailsScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import main.profile.ProfileScreen

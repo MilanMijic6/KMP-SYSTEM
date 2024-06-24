@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.vega.domain.model.my_events.MyEvent
 import eventhubapplication.composeapp.generated.resources.Res
 import eventhubapplication.composeapp.generated.resources.ic_event_location
 import eventhubapplication.composeapp.generated.resources.ic_tab_calendar
@@ -24,6 +25,7 @@ import ui.FontRegular
 
 @Composable
 fun MyEventDetails(
+    myEvent: MyEvent
 ) {
     Surface(
         modifier = Modifier
@@ -33,7 +35,6 @@ fun MyEventDetails(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            //todo use real title later on and setup real color
             Text(
                 text = "Victoria Robertson",
                 modifier = Modifier
@@ -49,9 +50,8 @@ fun MyEventDetails(
                 textAlign = TextAlign.Center
             )
 
-            //todo use real title later on
             Text(
-                text = "Internation Band Music Concert",
+                text = myEvent.name,
                 modifier = Modifier
                     .padding(
                         vertical = 8.dp,
@@ -62,27 +62,29 @@ fun MyEventDetails(
                 fontFamily = FontRegular()
             )
 
-            //todo user real data
             DetailRowItem(
                 modifier = Modifier
                     .padding(
                         horizontal = 16.dp
                     ),
                 iconResId = Res.drawable.ic_tab_calendar,
-                topText = "14 December, 2021",
-                bottomText = "Tuesday, 4:00PM - 9:00PM"
+                topText = myEvent.dateMonth,
+                bottomText = myEvent.dateDay
             )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+            )
 
-            //todo user real data
             DetailRowItem(
-                modifier = Modifier.padding(
-                    horizontal = 16.dp
-                ),
+                modifier = Modifier
+                    .padding(
+                        horizontal = 16.dp
+                    ),
                 iconResId = Res.drawable.ic_event_location,
-                topText = "Gala Convention Center",
-                bottomText = "36 Guild Street London, UK"
+                topText = myEvent.place,
+                bottomText = myEvent.address
             )
 
             Text(
@@ -100,7 +102,7 @@ fun MyEventDetails(
             )
 
             Text(
-                text = "Enjoy in  great event and show! Have a nice day!",
+                text = myEvent.description,
                 modifier = Modifier
                     .padding(
                         bottom = 8.dp,

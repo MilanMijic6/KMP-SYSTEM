@@ -25,7 +25,6 @@ import ui.FontSemiBold
 @ExperimentalMaterial3Api
 @Composable
 fun TopBarHeader(
-    modifier: Modifier = Modifier,
     titleColor: Color = Color.Black,
     title: String,
     backgroundColor: Color = Color.White,

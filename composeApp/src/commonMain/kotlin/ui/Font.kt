@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package ui
 
 import androidx.compose.runtime.Composable
@@ -9,7 +7,6 @@ import eventhubapplication.composeapp.generated.resources.extra_bold
 import eventhubapplication.composeapp.generated.resources.light
 import eventhubapplication.composeapp.generated.resources.regular
 import eventhubapplication.composeapp.generated.resources.semibold
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.Font
 
 @Composable

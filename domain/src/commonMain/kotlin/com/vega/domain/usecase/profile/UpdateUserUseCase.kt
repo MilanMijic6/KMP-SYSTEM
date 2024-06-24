@@ -8,5 +8,4 @@ class UpdateUserUseCase(
 ) {
     suspend fun execute(parameter: UpdateUserRequestBody) =
         repository.updateUser(parameter)
-
 }
