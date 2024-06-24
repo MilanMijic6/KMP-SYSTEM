@@ -1,8 +1,12 @@
 package main.myevents
 
 import BaseViewModel
+import com.vega.domain.model.my_events.MyEvent
 import com.vega.domain.usecase.my_events.GetMyEventsUseCase
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+
 class MyEventsViewModel(
     private val getMyEventsUseCase: GetMyEventsUseCase
 ) : BaseViewModel<MyEventsContract.Event, MyEventsContract.State, MyEventsContract.Effect>() {
@@ -50,5 +54,16 @@ class MyEventsViewModel(
                 MyEventsContract.Effect.NavigateToMyEventDetailsScreen(eventId)
             }
         }
+    }
+
+    fun splitEvents(events: List<MyEvent>): Pair<List<MyEvent>, List<MyEvent>> {
+        val now = Clock.System.now()
+
+        val (pastEvents, activeEvents) = events.partition {
+            val eventDate = Instant.parse(it.startAt)
+            eventDate < now
+        }
+
+        return pastEvents to activeEvents
     }
 }

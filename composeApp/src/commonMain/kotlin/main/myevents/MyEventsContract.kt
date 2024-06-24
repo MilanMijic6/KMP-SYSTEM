@@ -30,6 +30,5 @@ class MyEventsContract {
 
     sealed class Effect : ViewSideEffect {
         data class NavigateToMyEventDetailsScreen(val eventId: String) : Effect()
-
     }
 }

@@ -31,7 +31,7 @@ fun UpcomingEventDto.toUpcomingEvent(): UpcomingEvent {
     )
 }
 
-private fun formatDateDay(date: String): String {
+fun formatDateDay(date: String): String {
     var input = date
     if (!date.endsWith("Z")) input += "Z"
     val instant = input.toInstant()
@@ -39,7 +39,7 @@ private fun formatDateDay(date: String): String {
     return dateTime.dayOfMonth.toString()
 }
 
-private fun formatDateMonth(date: String): String {
+fun formatDateMonth(date: String): String {
     var input = date
     if (!date.endsWith("Z")) input += "Z"
     val instant = input.toInstant()

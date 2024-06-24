@@ -18,7 +18,7 @@ class MyEventsTab(
 ) : Tab {
     @Composable
     override fun Content() {
-        Navigator(MyEventsScreen()) {
+        Navigator(MyEventsScreen(navigator)) {
             FadeTransition(it)
         }
     }
