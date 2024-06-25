@@ -35,6 +35,7 @@ import ui.ColorLightGray
 import ui.ColorPurple
 import ui.ColorPurple75
 import util.CenteredDialog
+import util.PurpleFloatingButton
 import util.TabNavigationItem
 import util.TopBarActionType
 import util.TopBarHeader
@@ -81,6 +82,13 @@ class MainScreen(
                                 viewModel.handleEvents(MainContract.Event.ClickOnFilterEvent)
                             }
                         }
+                    }
+                },
+                floatingActionButton = {
+                    PurpleFloatingButton(
+                        isCreator = viewModel.viewState.value.mainScreenModel.isCreator
+                    ) {
+                        //todo handle add event
                     }
                 },
                 bottomBar = {

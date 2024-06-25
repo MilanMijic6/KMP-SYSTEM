@@ -26,6 +26,10 @@ class MainContract {
         data class NotLoggedIn(
             override val mainScreenModel: MainScreenModel
         ) : State()
+
+        data class IsCreator(
+            override val mainScreenModel: MainScreenModel
+        ) : State()
     }
 
     sealed class Effect : ViewSideEffect {

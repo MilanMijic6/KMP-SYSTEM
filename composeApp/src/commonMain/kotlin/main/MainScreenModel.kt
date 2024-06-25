@@ -1,9 +1,11 @@
 package main
 
 data class MainScreenModel(
-    val isLoggedIn: Boolean
+    val isLoggedIn: Boolean,
+    val isCreator: Boolean
 )
 
 fun setInitState(): MainScreenModel = MainScreenModel(
-    isLoggedIn = false
+    isLoggedIn = false,
+    isCreator = false
 )

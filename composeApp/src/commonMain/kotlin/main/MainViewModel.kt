@@ -2,12 +2,14 @@ package main
 
 import BaseViewModel
 import com.vega.domain.usecase.login.IsLoggedInUserUseCase
+import com.vega.domain.usecase.login.IsUserCreatorUserCase
 import com.vega.domain.usecase.profile.LogoutUseCase
 import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val isLoggedInUserUseCase: IsLoggedInUserUseCase,
-    private val logoutUserUseCase: LogoutUseCase
+    private val logoutUserUseCase: LogoutUseCase,
+    private val isUserCreatorUserCase: IsUserCreatorUserCase
 ) : BaseViewModel<MainContract.Event, MainContract.State, MainContract.Effect>() {
 
     override fun setInitialState(): MainContract.State = MainContract.State.LoggedIn()
@@ -26,6 +28,34 @@ class MainViewModel(
 
     init {
         isUserLoggedIn()
+        isUserCreator()
+    }
+
+    private fun isUserCreator() {
+        viewModelScope.launch {
+            runCatching {
+                isUserCreatorUserCase.execute()
+            }.onSuccess {
+                when (it) {
+                    true -> {
+                        setState {
+                            MainContract.State.IsCreator(
+                                viewState.value.mainScreenModel.copy(
+                                    isCreator = true
+                                )
+                            )
+                        }
+                    }
+                    false -> {
+                        MainContract.State.IsCreator(
+                            viewState.value.mainScreenModel.copy(
+                                isCreator = false
+                            )
+                        )
+                    }
+                }
+            }
+        }
     }
 
     private fun isUserLoggedIn() {

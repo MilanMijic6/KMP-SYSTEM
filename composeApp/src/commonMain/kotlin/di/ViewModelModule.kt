@@ -39,7 +39,8 @@ val viewModelModule = module {
     factory {
         MainViewModel(
             isLoggedInUserUseCase = get(),
-            logoutUserUseCase = get()
+            logoutUserUseCase = get(),
+            isUserCreatorUserCase = get()
         )
     }
     factory {
