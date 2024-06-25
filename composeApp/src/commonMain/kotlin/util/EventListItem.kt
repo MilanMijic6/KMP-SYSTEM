@@ -39,7 +39,6 @@ fun EventListItem(
     Column(
         modifier = contentModifier
             .padding(8.dp)
-            .fillMaxWidth()
             .background(backgroundColor, RoundedCornerShape(18.dp))
     ) {
         Box(
@@ -52,7 +51,7 @@ fun EventListItem(
                     bitmap = bitmap,
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .width(itemWidth.dp)
                         .height(150.dp)
                         .clip(RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.Crop

@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyEventsResponse(
-    val pageNumber: Int,
-    val totalPages: Int,
-    val data: List<MyEvent>
+    val totalCount: Int,
+    val results: List<MyEvent>
 )

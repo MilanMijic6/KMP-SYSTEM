@@ -10,4 +10,5 @@ object Constants {
     //preference
     const val KEY_TOKEN = "pref_token"
     const val KEY_ANONYMOUS_TOKEN = "pref_anonymous_token"
+    const val KEY_ROLE = "pref_user_role"
 }

@@ -32,7 +32,7 @@ class MyEventsViewModel(
                 setState {
                     MyEventsContract.State.Success(
                         viewState.value.myEventListScreenModel.copy(
-                            myEvents = it.data
+                            myEvents = it.results
                         )
                     )
                 }
@@ -60,7 +60,9 @@ class MyEventsViewModel(
         val now = Clock.System.now()
 
         val (pastEvents, activeEvents) = events.partition {
-            val eventDate = Instant.parse(it.startAt)
+            var date = it.startAt
+            if (!it.startAt.endsWith("Z")) date += "Z"
+            val eventDate = Instant.parse(date)
             eventDate < now
         }
 

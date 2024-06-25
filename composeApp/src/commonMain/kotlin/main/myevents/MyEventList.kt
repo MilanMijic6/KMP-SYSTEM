@@ -30,48 +30,49 @@ fun MyEventList(
     onItemClicked: (String) -> Unit
 ) {
     Column {
-        Text(
-            text = title,
-            modifier = Modifier
-                .padding(
-                    vertical = 8.dp,
-                    horizontal = 16.dp
-                ),
-            color = Color.Black,
-            fontSize = 24.sp,
-            fontFamily = FontRegular()
-        )
-
-        Spacer(
-            modifier = Modifier
-                .height(8.dp)
-        )
-
-        LazyRow(
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentPadding = PaddingValues(
-                horizontal = 16.dp
+        if (events.isNotEmpty()) {
+            Text(
+                text = title,
+                modifier = Modifier
+                    .padding(
+                        vertical = 8.dp,
+                        horizontal = 16.dp
+                    ),
+                color = Color.Black,
+                fontSize = 24.sp,
+                fontFamily = FontRegular()
             )
-        ) {
-            items(
-                events.size
-            ) { index ->
-                val item = events[index]
-                EventListItem(
-                    bitmap = convertBase64ToBitmap(item.image),
-                    labelText = item.name,
-                    iconLabelText = item.address,
-                    titleColor = Color.Black,
-                    textInBoxFirstLabel = item.dateDay,
-                    textInBoxSecondLabel = item.dateMonth.uppercase(),
-                    itemWidth = 240,
-                    backgroundColor = if (isPastEvent) ColorWhite else getEventBackgroundColor(item),
-                    contentModifier = Modifier
-                        .clickable {
-                            onItemClicked(item.id.toString())
-                        }
-                )
+
+            Spacer(
+                modifier = Modifier
+                    .height(8.dp)
+            )
+
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                items(
+                    events.size
+                ) { index ->
+                    val item = events[index]
+                    EventListItem(
+                        bitmap = convertBase64ToBitmap(item.image),
+                        labelText = item.name,
+                        iconLabelText = item.address,
+                        titleColor = Color.Black,
+                        textInBoxFirstLabel = item.dateDay,
+                        textInBoxSecondLabel = item.dateMonth.uppercase(),
+                        itemWidth = 240,
+                        backgroundColor = if (isPastEvent) ColorWhite else getEventBackgroundColor(
+                            item
+                        ),
+                        contentModifier = Modifier
+                            .clickable {
+                                onItemClicked(item.id.toString())
+                            }
+                    )
+                }
             }
         }
     }

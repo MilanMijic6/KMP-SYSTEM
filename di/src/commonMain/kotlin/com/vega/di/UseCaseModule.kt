@@ -15,6 +15,7 @@ import com.vega.domain.usecase.event_details.ReserveEventDetailsUseCase
 import com.vega.domain.usecase.events.GetUpcomingEventsUseCase
 import com.vega.domain.usecase.login.IsAnonymouslyLoggedInUserUseCase
 import com.vega.domain.usecase.login.IsLoggedInUserUseCase
+import com.vega.domain.usecase.login.IsUserCreatorUserCase
 import com.vega.domain.usecase.login.LoginUserAnonymouslyUseCase
 import com.vega.domain.usecase.login.LoginUserUseCase
 import com.vega.domain.usecase.my_events.GetMyEventsUseCase
@@ -99,6 +100,11 @@ val useCaseModule = module {
     single {
         CreateEventUseCase(
             get<CreateEventRepositoryImpl>()
+        )
+    }
+    single {
+        IsUserCreatorUserCase(
+            get<LoginRepositoryImpl>()
         )
     }
 }

@@ -51,7 +51,9 @@ val viewModelModule = module {
     factory {
         EventDetailsViewModel(
             getEventDetailsUseCase = get(),
-            reserveEventDetailsUseCase = get()
+            reserveEventDetailsUseCase = get(),
+            deleteEventUseCase = get(),
+            isUserCreatorUserCase = get()
         )
     }
     factory {

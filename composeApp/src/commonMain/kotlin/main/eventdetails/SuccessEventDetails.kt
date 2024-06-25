@@ -27,6 +27,7 @@ import util.PurpleButton
 
 @Composable
 fun SuccessEventDetails(
+    viewModel: EventDetailsViewModel,
     event: EventDetails,
     handleEvent: (EventDetailsContract.Event) -> Unit
 ) {
@@ -37,6 +38,17 @@ fun SuccessEventDetails(
                 color = ColorWhite
             )
     ) {
+        Header(
+            id = event.id,
+            title = "Event details",
+            handleEvent = handleEvent,
+            isCreator = viewModel.viewState.value.eventDetailsModel.isUserCreator
+        ) {
+            handleEvent(
+                EventDetailsContract.Event.ClickBackButton
+            )
+        }
+
         convertBase64ToBitmap(event.image)?.let {
             Image(
                 bitmap = it,
@@ -120,12 +132,5 @@ fun SuccessEventDetails(
                 EventDetailsContract.Event.ClickOnReserveButton
             )
         }
-    }
-    Header(
-        title = "Event details"
-    ) {
-        handleEvent(
-            EventDetailsContract.Event.ClickBackButton
-        )
     }
 }

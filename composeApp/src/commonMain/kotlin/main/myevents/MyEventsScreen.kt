@@ -5,16 +5,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import com.vega.domain.model.my_events.MyEvent
 import main.eventdetails.EventDetailsScreen
 import org.koin.compose.koinInject
-import ui.ColorGreen
-import ui.ColorRed
-import ui.ColorWhite
 import util.Loader
 
 class MyEventsScreen(
@@ -51,7 +47,10 @@ class MyEventsScreen(
                     //todo, show bottom sheet
                     is MyEventsContract.Effect.NavigateToMyEventDetailsScreen -> {
                         navigator.push(
-                            EventDetailsScreen(id = effect.eventId)
+                            EventDetailsScreen(
+                                id = effect.eventId,
+                                navigator = navigator
+                            )
                         )
                     }
                 }

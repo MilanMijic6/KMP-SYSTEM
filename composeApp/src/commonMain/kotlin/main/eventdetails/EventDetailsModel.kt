@@ -4,7 +4,8 @@ import com.vega.domain.model.event_details.EventDetails
 
 data class EventDetailsModel(
     val eventDetails: EventDetails,
-    val errorMsg: String?
+    val errorMsg: String?,
+    val isUserCreator: Boolean
 )
 
 fun setInitState(): EventDetailsModel = EventDetailsModel(
@@ -22,5 +23,6 @@ fun setInitState(): EventDetailsModel = EventDetailsModel(
         startDate = "",
         startTime = ""
     ),
-    errorMsg = ""
+    errorMsg = "",
+    isUserCreator = false
 )

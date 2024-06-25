@@ -7,4 +7,7 @@ interface SettingsStorage {
     fun saveToken(token: String)
     fun getToken(): String
     fun removeToken()
+    fun saveRole(role: String)
+    fun getRole(): String
+    fun removeRole()
 }

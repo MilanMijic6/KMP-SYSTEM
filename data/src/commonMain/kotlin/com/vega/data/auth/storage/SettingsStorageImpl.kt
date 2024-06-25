@@ -2,11 +2,13 @@ package com.vega.data.auth.storage
 
 import com.russhwolf.settings.Settings
 import com.vega.data.Constants.KEY_ANONYMOUS_TOKEN
+import com.vega.data.Constants.KEY_ROLE
 import com.vega.data.Constants.KEY_TOKEN
 
 class SettingsStorageImpl(
     private var settings: Settings
 ) : SettingsStorage {
+
     override fun saveAnonymousUser(anonymous: Boolean) = settings.putBoolean(KEY_ANONYMOUS_TOKEN, anonymous)
 
     override fun getAnonymousUser(): Boolean = settings.getBoolean(KEY_ANONYMOUS_TOKEN, false)
@@ -18,5 +20,11 @@ class SettingsStorageImpl(
     override fun getToken(): String = settings.getString(KEY_TOKEN, "")
 
     override fun removeToken() = settings.remove(KEY_TOKEN)
+
+    override fun saveRole(role: String) = settings.putString(KEY_ROLE, role)
+
+    override fun getRole(): String = settings.getString(KEY_ROLE, "")
+
+    override fun removeRole() = settings.remove(KEY_ROLE)
 
 }

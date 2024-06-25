@@ -62,7 +62,8 @@ class HomeScreen(
                 when (effect) {
                     is UpcomingEventsContract.Effect.NavigateToEventDetailsScreen -> {
                         navigator.push(EventDetailsScreen(
-                            id = effect.eventId
+                            id = effect.eventId,
+                            navigator = navigator
                         ))
                     }
                     UpcomingEventsContract.Effect.ShowLoginDialog -> {

@@ -33,5 +33,8 @@ class ProfileRepositoryImpl(
         }.getOrThrow()
     }
 
-    override suspend fun logout() = storage.removeToken()
+    override suspend fun logout() {
+        storage.removeToken()
+        storage.removeRole()
+    }
 }

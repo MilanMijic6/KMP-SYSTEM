@@ -19,12 +19,14 @@ class LoginRepositoryImpl(
         runCatching {
             loginApi.login(credentials)
         }.mapCatching {
-            it.body<LoginResponse>().token
-        }.mapCatching {
-            settingsStorage.saveToken(it)
+            settingsStorage.saveToken(it.body<LoginResponse>().token)
+            settingsStorage.saveRole(it.body<LoginResponse>().role)
         }.getOrThrow()
     }
 
     override suspend fun loginUserAnonymously() =
         settingsStorage.saveAnonymousUser(anonymous = true)
+
+    override suspend fun isUserCreator(): Boolean =
+        settingsStorage.getRole().isNotEmpty() && settingsStorage.getRole() == "Creator"
 }
