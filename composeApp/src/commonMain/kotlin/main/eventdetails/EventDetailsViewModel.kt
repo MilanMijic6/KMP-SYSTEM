@@ -6,7 +6,6 @@ import com.vega.domain.usecase.event_details.GetEventDetailsUseCase
 import com.vega.domain.usecase.event_details.ReserveEventDetailsUseCase
 import com.vega.domain.usecase.login.IsUserCreatorUserCase
 import kotlinx.coroutines.launch
-import main.MainContract
 
 class EventDetailsViewModel(
     private val getEventDetailsUseCase: GetEventDetailsUseCase,
